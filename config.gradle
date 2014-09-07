@@ -1,0 +1,39 @@
+defaultTasks 'clean', 'jekyllBuild'
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'io.staticcdn.sdk:staticcdn-sdk-gradle-plugin:0.1.15'
+    }
+}
+
+
+task dev() dependsOn 'jekyllWatch'
+task release() dependsOn 'clean', 'jekyllBuild', 'staticcdnOptimize', 'uploadFilesToS3'
+
+
+task clean(type: Delete) {
+    delete project.buildDir
+}
+
+task jekyllBuild(type: JekyllBuildTask)
+
+task jekyllWatch(type: JekyllWatchTask)
+
+task staticcdnOptimize(type: io.staticcdn.sdk.gradle.OptimizeTask) {
+    config = [
+            inputWwwRoots        : ['build/jekyll-generated-site/'],
+            outputWwwRoot        : 'build/staticcdn-optimized-files/',
+            inputFilePathPatterns: [
+                    '^.*html$',
+            ]
+    ]
+}
+
+task uploadFilesToS3(type: io.staticcdn.sdk.gradle.S3Task) {
+    bucketName='www-statico-io'
+    inputFolders=['build/staticcdn-optimized-files/']
+    inputFilePathPatterns=['^.*html$']
+}

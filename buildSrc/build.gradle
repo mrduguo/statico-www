@@ -1,0 +1,8 @@
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile 'com.amazonaws:aws-java-sdk:1.7.4'
+    compile 'io.staticcdn.sdk:staticcdn-sdk-client:0.1.15'
+}
+
