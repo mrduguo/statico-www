@@ -1,0 +1,33 @@
+<h3 id="optimizations-css">CSS</h3>
+
+<h4 id="optimizations-css-minification">CSS Minification</h4>
+<p>CSS will be minified with <a href="https://github.com/jakubpawlowicz/clean-css">clean-css</a>. You may pass additional minification options by <a href="#integration-configuration-clean-css">cleancssOptions</a>.</p>
+
+<h4 id="optimizations-css-aggregation">CSS Aggregation</h4>
+<p>CSS files will be aggregated automatically if there is no other html element between the CSS link tag. CSS <code>@import</code> rule will treated as aggregation to inline to the parent CSS file. A <a href="#sio-ref-id">sio-ref-id</a> annotation will start a new aggregation.
+{% highlight html %}
+<link rel="stylesheet" type="text/css" href="first-aggregation-1.css"/>
+<link rel="stylesheet" type="text/css" href="first-aggregation-2.css"/>
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="stylesheet" type="text/css" href="second-aggregation-1.css"/>
+<link rel="stylesheet" type="text/css" href="second-aggregation-2.css"/>
+<link rel="stylesheet" type="text/css" href="third-aggregation-1.css?sio-ref-id=third-aggregation-css"/>
+<link rel="stylesheet" type="text/css" href="third-aggregation-2.css"/>
+{% endhighlight %}
+</p>
+
+<h4 id="optimizations-css-less">Less CSS</h4>
+<p><a href="http://lesscss.org/">Less</a> will handled transparently by <a href="http://lesscss.org/usage/#command-line-usage-server-side-and-command-line-usage">lessc</a>. You may pass additional Less CSS options by <a href="#integration-configuration-less-css">lessOptions</a>. To support Less CSS development locally, you may include the less lib and supported config with <a href="#sio-local-development-only">sio-local-development-only</a> annotation, those file will be ignored during optimization. e.g.
+{% highlight html %}
+<script src="less-settings.js?sio-local-development-only=enabled" type="text/javascript"></script>
+<script src="less-1.7.4.js?sio-local-development-only=enabled" type="text/javascript"></script>
+{% endhighlight %}
+</p>
+
+<h4 id="sio-css-embed">annotation: <code>sio-css-embed</code></h4>
+<p>Inline the CSS onto html page with <code>style</code> tag. Apply the annotation <code>sio-css-embed=enabled</code> to first link. e.g.
+{% highlight html %}
+<link rel="stylesheet" type="text/css" href="embedded-with-style-tag-1.css?sio-css-embed=enabled"/>
+<link rel="stylesheet" type="text/css" href="embedded-with-style-tag-2.css"/>
+{% endhighlight %}
+</p>

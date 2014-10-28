@@ -1,0 +1,464 @@
+<div>
+    <h1 id="integration" class="page-header">Integration</h1>
+
+    <p class="lead">Simplicity is at the heart of statico philosophy. We offer simple integration with your existing code base and development processes. The integration also offer simple way to deploy your site to S3 and FTP.</p>
+
+    <h3 id="integration-gradle"><span id="integration-standalone"></span>Standalone/Gradle</h3>
+    <p>The standalone optimizer is based on popular build automation tool <a href="http://www.gradle.org/">Gradle</a>. It works on Windows / Linux / Mac OS X with <a href="https://java.com/en/download/index.jsp">JAVA 6+</a>.</p>
+    
+    <h4 id="integration-standalone-getting-started">Getting Started</h4>
+    <p>Follow the steps to get started:
+        <ol>
+            <li>
+                download <a href="https://repo1.maven.org/maven2/io/staticcdn/sdk/staticcdn-sdk-standalone-optimizer/{{ site.statico.sdk.version }}/staticcdn-sdk-standalone-optimizer-{{ site.statico.sdk.version }}.zip">
+                staticcdn-sdk-standalone-optimizer-{{ site.statico.sdk.version }}.zip
+                </a> [50KB]
+            </li>
+            <li>
+                unzip <code>staticcdn-sdk-standalone-optimizer-{{ site.statico.sdk.version }}.zip</code>
+            </li>
+            <li>
+                run <code>./optimizer</code> (double click <code>optimizer.bat</code> on Windows)
+            </li>
+        </ol>
+    All in one to run from command line:
+{% highlight sh %}
+curl -O https://repo1.maven.org/maven2/io/staticcdn/sdk/staticcdn-sdk-standalone-optimizer/{{ site.statico.sdk.version }}/staticcdn-sdk-standalone-optimizer-{{ site.statico.sdk.version }}.zip
+unzip staticcdn-sdk-standalone-optimizer-{{ site.statico.sdk.version }}.zip
+cd staticcdn-sdk-standalone-optimizer-{{ site.statico.sdk.version }}
+./optimizer
+# OUTPUT:
+# optimized session 94ca5ddb12cf730f139515b272a4c36f to ***/build/statico-optimized-files/hello-world.html
+
+{% endhighlight %}
+
+    You may copy your site source code to <code>wwwroot</code> or configure <a href="#integration-gradle-config">config.gradle</a> to work with your existing code base.
+    </p>
+
+    <h4 id="integration-gradle-config">config.gradle</h4>
+    <p>The <code>config.gradle</code> file contain configuration to the optimizer. Full list of <code>statico</code> options in <a href="#integration-configuration">configuration</a> section.</p>
+    <p>
+    Here is the default <code>config.gradle</code>:
+{% highlight sh %}
+defaultTasks 'staticoOptimize'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'io.staticcdn.sdk:staticcdn-sdk-gradle-plugin:{{ site.statico.sdk.version }}'
+    }
+}
+apply plugin: 'statico'
+
+statico {
+    inputWwwRoots = ['wwwroot/']
+    outputWwwRoot = 'build/statico-optimized-files/'
+    inputFilePathPatterns = [
+            '^.*html$',
+            '^.*inc$',
+    ]
+    optimizerOptions = [
+            autoEmbedCss          : true,
+            autoDataUrlMaxFileSize: 1000
+    ]
+}
+{% endhighlight %}
+    </p>
+
+
+
+    <h3 id="integration-maven">Maven</h3>
+    <p><a href="http://maven.apache.org/">Apache Maven</a> is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a central piece of information.</p>
+
+    <h4 id="integration-maven-example">Example</h4>
+    <p>The sample jsp project built with maven (<a href="https://github.com/mrduguo/staticcdn-sdk/tree/master/samples/jsp-maven">source code on github</a>) demonstrate how the optimization works with following technologies:
+    <ul>
+        <li>Maven</li>
+        <li>JSP</li>
+        <li>CSS</li>
+        <li>LESSCSS</li>
+        <li>JavaScript</li>
+    </ul>
+    </p>
+{% highlight xml %}
+<plugin>
+    <groupId>io.staticcdn.sdk</groupId>
+    <artifactId>staticcdn-sdk-maven-plugin</artifactId>
+    <version>{{ site.statico.sdk.version }}</version>
+    <executions>
+        <execution>
+            <id>optimize-static-assets</id>
+            <goals>
+                <goal>optimize</goal>
+            </goals>
+            <configuration>
+                <inputWwwRoots>
+                    <inputWwwRoot>
+                        ${basedir}/src/main/webapp
+                    </inputWwwRoot>
+                </inputWwwRoots>
+                <outputWwwRoot>
+                    ${project.build.directory}/statico-optimized-files
+                </outputWwwRoot>
+                <inputFilePathPatterns>
+                    <inputFilePathPattern>
+                        /static/include/.*inc
+                    </inputFilePathPattern>
+                </inputFilePathPatterns>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+{% endhighlight %}
+
+    <p>Full list of options in <a href="#integration-configuration">configuration</a> section.</p>
+
+
+    <h3 id="integration-configuration">Configuration</h3>
+    <p>The configuration apply to maven and gradle plugin.</p>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th style="width: 100px;">Name</th>
+                <th style="width: 100px;">Type</th>
+                <th style="width: 50px;">Default</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>inputWwwRoots</td>
+                <td>String List</td>
+                <td>null (required)</td>
+                <td>
+                    <div>Base folders for scan input files recursively.</div>
+                    <div>e.g. with value <code>['folder1','folder2']</code>, it will try to scan all files from <code>folder1</code> first, then scan <code>folder2</code>. Same file name found in <code>folder2</code> will be ignored.</div>
+                </td>
+            </tr>
+            <tr>
+                <td>outputWwwRoot</td>
+                <td>String</td>
+                <td>null (required)</td>
+                <td>Folder to store the optimized files.</td>
+            </tr>
+            <tr>
+                <td>inputFilePathPatterns</td>
+                <td>RegEx List</td>
+                <td>null (required)</td>
+                <td>
+                    <div>File will be included for optimization if any of the regular expression match with the file path.</div>
+                    <div>e.g. for file <code>/opt/staticcdn/src/statico-www/siteSource/document/index.html</code> with inputWwwRoots include <code>/opt/staticcdn/src/statico-www/siteSource</code>. The file path will be <code>/document/index.html</code>  and it will match any of inputFilePathPatterns <code>.*index.html, .*/index.html, /document/index.html</code>, but not <code>index.html, /index.html</code>. You may test your RegEx online at <a href="http://ocpsoft.org/tutorials/regular-expressions/java-visual-regex-tester/">Visual Regex Tester</a>.</div>
+                </td>
+            </tr>
+            <tr>
+                <td id="integration-configuration-refs-file-name">refsFileNameSuffix</td>
+                <td>String</td>
+                <td>.refs</td>
+                <td>
+                    The suffix used to store the references used in the optimize session which you can used programmatically later. Set to <code>skip</code> to not create the file. By default, it contain the optimization session id and the optimized file url. e.g.
+{% highlight sh %}
+session=0192e184f5e7d834381b44c934531f05
+optimized=//d310mzohrxmrzp.cloudfront.net/142268d86c7b3721b646ed83b0383965.html
+{% endhighlight %}
+                    You may get back additional file urls by add <a href="#sio-ref-id"><code>sio-ref-id</code></a> annotate to the resource you want.
+                </td>
+            </tr>
+            <tr>
+                <td>originalFileNameSuffix</td>
+                <td>String</td>
+                <td>.origin</td>
+                <td>The suffix used to backup original file along the optimized file. Set to <code>skip</code> to not backup the original file.</td>
+            </tr>
+            <tr>
+                <td>optimizerOptions</td>
+                <td>Object</td>
+                <td>null</td>
+                <td>Global configuration for the optimizer. See details in <a href="#integration-configuration-optimizer-options">Optimizer Options</a></td>
+            </tr>
+            <tr>
+                <td>apiKey/apiSecret</td>
+                <td>String</td>
+                <td>null</td>
+                <td>Authentication to statico API server. See details in <a href="#integration-authentication">Authentication</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <h4 id="integration-configuration-optimizer-options">Optimizer Options</h4>
+    <p>The global wide options to optimize used for all sessions.</p>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th style="width: 100px;">Name</th>
+                <th style="width: 100px;">Type</th>
+                <th style="width: 50px;">Default</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    version
+                </td>
+                <td>Integer</td>
+                <td>null</td>
+                <td>
+                    The optimize session version. With same configuration, statico server will give backed previous optimized result. Increase the version number to force redo the optimization.
+                </td>
+            </tr>
+            <tr>
+                <td>profile</td>
+                <td>String</td>
+                <td>safe</td>
+                <td>
+                    The way to perform optimize. There are two type of profile:
+                    <ul>
+                        <li><code>safe</code>
+                            <ul>
+                                <li>lossless optimize unless requested by optimization annotation</li>
+                                <li>fail for any missing referenced file</li>
+                            </ul>
+                        </li>
+                        <li><code>relaxed</code>
+                            <ul>
+                                <li>ignore all missing referenced files</li>
+                                <li>automatically move JavaScripts to the bottom of the page</li>
+                                <li>remove all conditional comments for IE</li>
+                                <li>used on <a href="/">statico.io</a> homepage for preview</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>cdnBaseUrl</td>
+                <td>String</td>
+                <td>null</td>
+                <td>
+                    The base url to serve the optimized references. By default, CloudFront will used for distribution. You may setup your own CDN distribution to serve the optimized files.
+                </td>
+            </tr>
+            <tr>
+                <td>autoEmbedCss</td>
+                <td>Boolean</td>
+                <td>false</td>
+                <td>
+                    Automatically embed css to the page instead of link to a a CSS file speed up the rendering.
+                </td>
+            </tr>
+            <tr>
+                <td>autoEmbedJs</td>
+                <td>Boolean</td>
+                <td>false</td>
+                <td>
+                    Automatically embed js to page to speed up page load time.
+                </td>
+            </tr>
+            <tr>
+                <td id="integration-configuration-auto-data-url">autoDataUrlMaxFileSize</td>
+                <td>Integer</td>
+                <td>null</td>
+                <td>
+                    Any referenced file size smaller than this will use data url embed into the CSS.
+                </td>
+            </tr>
+            <tr>
+                <td id="integration-configuration-auto-sprite-size">autoSpriteMinFileSize
+                    autoSpriteMaxFileSize
+                </td>
+                <td>Integer</td>
+                <td>null</td>
+                <td>
+                    Any referenced background image size in the range and meet the sprite criteria will include to generate the sprite image.
+                </td>
+            </tr>
+            <tr>
+                <td id="integration-configuration-clean-css">cleancssOptions</td>
+                <td>String</td>
+                <td>--s0</td>
+                <td>
+                    Used for <a href="https://github.com/jakubpawlowicz/clean-css#how-to-use-clean-css-cli">clean-css options</a> to minify CSS.
+                </td>
+            </tr>
+            <tr>
+                <td id="integration-configuration-less-css">lessOptions</td>
+                <td>String</td>
+                <td>null</td>
+                <td>
+                    Used for <a href="http://lesscss.org/usage/#command-line-usage-server-side-and-command-line-usage">lessc</a> to compile less to CSS.
+                </td>
+            </tr>
+            <tr id="integration-configuration-uglifyjs">
+                <td>uglifyjsOptions</td>
+                <td>String</td>
+                <td>--mangle --compress join_vars=false, loops=false, unused=false --define OPTIMISED=true</td>
+                <td>
+                    Used for <a href="https://github.com/mishoo/UglifyJS2#usage">uglifyjs options</a> to minify JavaScript.
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p id="integration-configuration-optimizer-options-comment">You may configure individually for each session by set the option as JSON as comment in the root file. e.g.
+{% highlight xml %}
+...
+<head>
+<!--
+    statico-optimizer-options=
+{
+    "autoSpriteMinFileSize":1,
+    "autoSpriteMaxFileSize":10000,
+    "uglifyjsOptions":"--mangle --compress"
+}
+-->
+...
+{% endhighlight %}
+    </p>
+
+
+    <h3 id="integration-authentication">Authentication</h3>
+    <p>Authentication is optional. We restrict API access by limit per account. If you don't provide apiKey, anonymous will be assigned as account. You will get <code>429 Too Many Requests</code> error message if reach the limit up to 1,000 requests per hour. For production use, we recommend to get your own apiKey by <a href="mailto:team@statico.io?subject=statico%20api%20key%20request">contact us</a> for reliable integration.</p>
+    <p>Static assets stored as <code>FILE_MD5_HASH.FILE_EXTENSION</code>. There is no delete operation exposed by API and nobody can overwritten a file if it's already exist. With this simple storage mode, we can open up API for easy access.</p>
+    <p>The optimization plugin will lookup account information in following order:
+        <ul>
+            <li><a href="#integration-configuration">Configuration</a> - <code>apiKey and apiSecret</code></li>
+            <li>Environment Variables - <code>STATICO_API_KEY and STATICO_API_SECRET</code></li>
+            <li>Java System Properties - <code>staticoApiKey and staticoApiSecret</code></li>
+            <li>Credential properties file at <code>~/.statico/credentials</code> with  <code>apiKey and apiSecret</code></li>
+        </ul>
+        </p>
+
+
+    <h3 id="integration-languages">Languages Support</h3>
+    <p>statico works for standard front end technologies. It works with all backend languages such as asp, jsp or php. For dynamic web sites, it's better to put static assets references in set of include files which can be reused in multiple pages.</p>
+
+    <h4 id="integration-language-include">Dynamic Include Example</h4>
+    <p>The example based on ASP/.NET, but the folder structure and include approach apply to all other languages.</p>
+    <h5 id="integration-language-include-folder-structure">Folder Structure</h5>
+        {% highlight text %}
+wwwroot
+├── index.aspx
+└── assets
+    ├── include
+    │   └── css
+    │   │ ├── homepage-critical-css.inc
+    │   │ └── public-shared-css.inc
+    │   └── js
+    │     └── all-in-one-js.inc
+    ├── css
+    │   ├── homepage.css
+    │   ├── main-content.css
+    │   ├── header.css
+    │   └── footer.css
+    ├── images
+    │   └── logo.png
+    ├── js
+    │   └── homepage.js
+    └── vendors
+        └── jquery-1.11.0
+            └── jquery-1.11.0.js
+{% endhighlight %}
+    <h5 id="integration-language-include-index">index.aspx</h5>
+        {% highlight html %}
+<html>
+    <head>
+        <!--#include file="/assets/include/css/homepage-critical-css.inc"-->
+        ...
+    </head>
+    <body>
+        <!--#include file="/assets/include/css/public-shared-css.inc"-->
+        ...
+        <!--#include file="/assets/include/js/all-in-one-js.inc"-->
+    </body>
+</html>
+{% endhighlight %}
+
+    <h5 id="integration-language-include-homepage-critical-css">homepage-critical-css.inc</h5>
+        {% highlight html %}
+<link rel="stylesheet" type="text/css" href="/assets/css/header.css?sio-css-embed=enabled"/>
+<link rel="stylesheet" type="text/css" href="/assets/css/homepage.css"/>
+{% endhighlight %}
+
+    <h5 id="integration-language-include-public-shared-css">public-shared-css.inc</h5>
+        {% highlight html %}
+<link rel="stylesheet" type="text/css" href="/assets/css/main-content.css"/>
+<link rel="stylesheet" type="text/css" href="/assets/css/footer.css"/>
+{% endhighlight %}
+
+    <h5 id="integration-language-include-all-in-one-js">all-in-one-js.inc</h5>
+        {% highlight html %}
+<script type="text/javascript" src="/assets/vendors/jquery-1.11.0/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="/assets/js/homepage.js"></script>
+{% endhighlight %}
+
+
+    <h4 id="integration-language-include-syntax">Include Syntax</h4>
+
+    <p>Sever side include is a standard feature in all server side script languages.</p>
+    <h5 id="integration-language-include-asp">ASP/ASP.NET</h5>
+    {% highlight asp %}
+<!--#include file="/assets/include/css/homepage-critical-css.inc"-->
+    {% endhighlight %}
+    <h5 id="integration-language-include-jsp">JSP</h5>
+    {% highlight jsp %}
+<jsp:include page="/assets/include/css/homepage-critical-css.inc" />
+    {% endhighlight %}
+    <h5 id="integration-language-include-php">PHP</h5>
+    {% highlight php %}
+<?php include '/assets/include/css/homepage-critical-css.inc'; ?>
+    {% endhighlight %}
+
+
+
+    <h3 id="integration-s3">Upload Optimized Files To S3</h3>
+    <p>The gradle/standalone integration offer easy way to upload your optimized site to S3 with optimized default settings for static assets:
+    <ul>
+        <li>use gzip by default for html/js/css files</li>
+        <li>with Cache-Control header: public, max-age=3600</li>
+        <li>allow public read access</li>
+    </ul>
+    More details see the <a href="https://github.com/mrduguo/staticcdn-sdk/blob/master/gradle/src/main/java/io/staticcdn/sdk/gradle/S3Task.java">S3Task implementation</a>. Sample task configuration:
+    </p>
+{% highlight groovy %}
+task uploadFilesToS3(type: io.staticcdn.sdk.gradle.S3Task) {
+    bucketName='www-statico-io'
+    inputFolders=['build/statico-optimized-files/']
+    inputFilePathPatterns=['.*html$']
+}
+{% endhighlight %}
+
+    <h3 id="integration-ftp">Upload Optimized Files To FTP</h3>
+    <p>You can config the standard gradle ftp support to upload site to ftp server:</p>
+{% highlight groovy %}
+configurations {
+    ftpAntTask
+}
+dependencies {
+    ftpAntTask("org.apache.ant:ant-commons-net:1.9.3") {
+        module("commons-net:commons-net:1.4.1") {
+            dependencies "oro:oro:2.0.8:jar"
+        }
+    }
+}
+task uploadSiteToServer() << {
+        ant {
+            taskdef(name: 'ftp',
+                    classname: 'org.apache.tools.ant.taskdefs.optional.net.FTP',
+                    classpath: configurations.ftpAntTask.asPath)
+            ftp(    server: "YOUR_FTP_SERVER",
+                    port: 21,
+                    remotedir: '/YOUR_FTP_REMOTE_DIR',
+                    userid: "YOUR_FTP_USER_ID",
+                    password: "YOUR_FTP_PASSWORD"
+            ) {
+                fileset(dir: "build/statico-optimized-files/")
+            }
+        }
+}
+{% endhighlight %}
+</div>

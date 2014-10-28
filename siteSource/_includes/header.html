@@ -1,0 +1,24 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description"
+      content="statico.io, a static assets optimization cloud service, the power tool for developers to deliver sub second desktop and mobile web experience">
+<meta name="keywords"
+      content="HTML, CSS, JS, JavaScript, bootstrap, front-end, frontend, web development, optimization, optimize, cleancss, lesscss, uglifyjs">
+<meta name="author" content="Guo Du and contributors">
+
+<title>
+{% if page.url == site.baseurl %}
+    {{ page.title }}
+{% else %}
+    {{ page.title }} &middot; statico.io
+{% endif %}
+</title>
+
+<!-- stylesheet -->
+<link rel="stylesheet/less" type="text/css" href="/assets/less/page/{{ page.layout }}.less?sio-css-embed=enabled"/>
+<script type="text/javascript" src="/assets/js/common/less-settings.js?sio-local-development-only=enabled"></script>
+<script type="text/javascript" src="/assets/vendors/less-1.7.4/less.js?sio-local-development-only=enabled"></script>
+
+<!-- Favicons -->
+<link rel="icon" href="/favicon.ico?sio-use-cdn=enabled">

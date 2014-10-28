@@ -13,3 +13,8 @@ port:             9001
 baseurl:          ''
 url:              http://www.statico.io
 encoding:         UTF-8
+
+# statico
+statico:
+  sdk:
+    version:      0.1.16

@@ -1,0 +1,156 @@
+.navbar > .container .navbar-brand {
+  background: url(../../images/logo/statico-logo-dark-bg-small.png?sio-data-url=enabled) no-repeat;
+  background-size: 108px 20px;
+  width: 108px;
+  height: 20px;
+  margin: 15px 15px 0 15px;
+}
+
+@media (min-width: @screen-sm) {
+  .navbar > .container {
+    nav > ul > li > a {
+      font-size: 21px;
+      line-height: 2em;
+    }
+    .navbar-brand {
+      background-size: 162px 30px;
+      width: 162px;
+      height: 30px;
+      margin: 15px 15px 0 0;
+    }
+  }
+
+  ul.nav li.dropdown:hover > ul.dropdown-menu {
+    display: block;
+  }
+
+  ul.dropdown-menu .sub-item {
+    padding-left: 40px;
+  }
+}
+
+.flat-panel {
+  text-align: center;
+  color: #ffffff;
+  background-color: @brand-primary;
+  a, a:hover {
+    color: #ffffff;
+  }
+  a {
+    text-decoration: underline;
+  }
+  ul {
+    padding: 0;
+    li {
+      list-style: none;
+      line-height: 1.6em;
+    }
+    margin-bottom: 80px;
+  }
+  .fa {
+    margin-right: 5px;
+  }
+  .col-sm-4>i{
+    font-size: 4em;
+    margin: 20px 0 20px 0;
+  }
+  .container {
+    padding: 160px 0 80px;
+  }
+  .flat-title {
+    background-color: darken(@brand-primary,3%);
+    h2 {
+      padding: 40px 0 40px 0;
+      margin: 0;
+      line-height: 3em;
+    }
+  }
+
+  &.flat-panel-dark{
+    background-color: @dark-bg;
+    .flat-title {
+      background-color: darken(@dark-bg,2%);
+    }
+  }
+}
+
+.page-footer {
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+
+.preview-optimize{
+  width: 100%;
+  position: relative;
+  border-radius: 5px;
+  background: #fff;
+
+  input {
+    color: #333;
+    background: #fff;
+    font-size: 16px;
+    padding: 15px 15px;
+    display: inline-block;
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    float: left;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-radius: 5px;
+  }
+  input:focus {
+    background-color: #eee;
+  }
+
+  button.btn {
+    color: #fff;
+    background: @brand-primary;
+    font-size: 16px;
+    display: inline-block;
+    float: left;
+    height: 50px;
+    margin: 0;
+    width: 100%;
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+
+  button.btn span {
+    padding: 16px;
+  }
+
+  button.btn:hover {
+    background: darken(@brand-primary,10%);
+  }
+
+  .input-group-btn {
+    border-radius: 0 5px 5px 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+  }
+
+  .previewResult {
+    margin-top: 30px;
+    text-align: left;
+  }
+  .previewResult a{
+    color:#3498db;
+  }
+}

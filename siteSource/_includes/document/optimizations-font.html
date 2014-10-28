@@ -1,0 +1,18 @@
+<h3 id="optimizations-font">Fonts</h3>
+<p>Given that up to <a href="http://caniuse.com/#feat=fontface">93.43%</a> [ as of Oct 2014] of browser support web font, you have to accept that some of your visitor will not able show web font. If web font just used for text to looks cooler, it's not end of the day even if the web font failed to render. If your site cannot accept the failure of web font, you have to use fall back alternatives such as svg/image.</p>
+
+<h4 id="sio-data-url-fonts">annotation: <code>sio-data-url</code></h4>
+<p>
+    Inline the font with data url. It's not perfect, but by inline WOFF, you covered at least <a href="http://caniuse.com/#feat=woff">83.7%</a> of all users. e.g.
+{% highlight css %}
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src:
+        local('Lato Regular'), local('Lato-Regular'),
+        url(lato-regular.woff?sio-data-url=enabled) format('woff');
+}
+{% endhighlight %}
+    You may inline older web font format TTF to support older Android browsers on top of WOFF supported browsers.
+</p>

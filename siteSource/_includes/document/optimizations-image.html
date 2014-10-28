@@ -1,0 +1,65 @@
+<h3 id="optimizations-image">Images</h3>
+
+<h4 id="sio-img-optimize">annotation: <code>sio-img-optimize</code></h4>
+<p>Image will optimized by default with Lossy option offered by <a href="https://kraken.io/">Kraken</a>, you will be able to save up to 90% of the initial file weight. You may disabled it with the annotation. e.g.
+{% highlight css %}
+.logo-icon{
+    background-image: url(logo.png?sio-img-optimize=disabled)
+}
+{% endhighlight %}
+</p>
+
+<h4 id="sio-data-url-img">annotation: <code>sio-data-url</code></h4>
+<p>
+    Inline the image with data url. e.g.
+{% highlight css %}
+.logo-icon{
+    background-image: url(logo.png?sio-data-url=enabled)
+}
+{% endhighlight %}
+    You may config <a href="#integration-configuration-auto-data-url">autoDataUrlMaxFileSize</a> to apply data url globally as well. It will optimized as:
+{% highlight css %}
+.logo-icon{background-image:url(data:image/png;base64,iVBORw0KGgo....CYII=)}
+{% endhighlight %}
+</p>
+
+<h4 id="sio-img-quality">annotation: <code>sio-img-quality</code></h4>
+<p>Inline the image with low quality jpeg file. Quality range from 0.0 to 1.0. Following example will render a low quality hero backgroud image without additional network request, then render full quality image progressively:
+{% highlight html %}
+<img  src="hero.png?sio-use-cdn=enabled" style="width: 1000px;height: 500px;background-image: url(hero.png?sio-img-quality=0.3)"/>
+{% endhighlight %}
+</p>
+
+<h4 id="sio-auto-sprite">annotation: <code>sio-auto-sprite</code></h4>
+<p>Generate sprite for background images if it meet all requirements in the same css class definition:
+    <ol>
+        <li>has <code>background-image</code></li>
+        <li>has <code>width</code></li>
+        <li>has <code>height</code></li>
+        <li>doesn't has <code>background-size</code></li>
+        <li>doesn't has <code>sio-auto-sprite=disabled</code></li>
+        <li>doesn't has <code>sio-data-url=enabled</code></li>
+        <li>doesn't has <code>background-repeat</code> other than no-repeat</code></li>
+        <li>and meet any of requirements:
+            <ul>
+                <li>has <code>sio-auto-sprite=enabled</code></li>
+                <li>has <code>sio-auto-sprite-name</code></li>
+                <li>file size between <a href="#integration-configuration-auto-sprite-size">autoSpriteMinFileSize</a> and <a href="#integration-configuration-auto-sprite-size">autoSpriteMaxFileSize</a></li>
+            </ul>
+        </li>
+    </ol>
+
+Sample sprite images css:
+{% highlight css %}
+.logo{
+    background-image:url(logo.png?sio-auto-sprite=enabled);
+    width: 100px;
+    height: 20px;
+}
+.pricing-elastic{
+    background-image:url(pricing-elastic.png?sio-auto-sprite-name=default);
+    width: 100px;
+    height: 100px;
+}
+{% endhighlight %}
+</p>

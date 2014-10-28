@@ -1,0 +1,32 @@
+<h3 id="optimizations-html">HTML</h3>
+<p>File with extension of <code>html</code>, <code>htm</code>, <code>inc</code>, <code>php</code>, <code>asp</code>, <code>aspx</code> or <code>jsp</code> will be treated as HTML document. HTML document will be minified and scanned for CSS and JavaScript references for further optimization.
+</p>
+
+<h4 id="sio-use-cdn">annotation: <code>sio-use-cdn</code></h4>
+<p>Serve the referenced resources from CDN. e.g.
+{% highlight html %}
+<link rel="shortcut icon" href="/favicon.ico?sio-use-cdn=enabled">
+<img src="/assets/images/logo-small.png?sio-use-cdn=enabled"/>
+{% endhighlight %}
+</p>
+
+<h4 id="sio-local-development-only">annotation: <code>sio-local-development-only</code></h4>
+<p>Ignore the file during optimization. e.g.
+{% highlight html %}
+<script src="less-settings.js?sio-local-development-only=enabled" type="text/javascript"></script>
+<script src="less-1.7.4.js?sio-local-development-only=enabled" type="text/javascript"></script>
+{% endhighlight %}
+</p>
+
+<h4 id="sio-ref-id">annotation: <code>sio-ref-id</code></h4>
+<p>Expose the optimized resource reference for further use to store in <a href="#integration-configuration-refs-file-name">refs file</a>. It apply to all type of resources such as CSS, JS and images.  e.g. with a script reference:
+{% highlight html %}
+<script src="all-in-one.js?sio-ref-id=all-in-one-js" type="text/javascript"></script>
+{% endhighlight %}
+You will get back in the reference file:
+{% highlight sh %}
+session=0192e184f5e7d834381b44c934531f05
+optimized=//d310mzohrxmrzp.cloudfront.net/142268d86c7b3721b646ed83b0383965.html
+all-in-one-js=//d310mzohrxmrzp.cloudfront.net/88eadf357b7ab6abc1aa748e43804af7.js
+{% endhighlight %}
+</p>

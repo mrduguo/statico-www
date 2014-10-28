@@ -1,0 +1,33 @@
+<h3 id="optimizations-js">JavaScript</h3>
+
+<h4 id="optimizations-js-minification">JavaScript Minification</h4>
+<p>JavaScript will be minified with <a href="https://github.com/mishoo/UglifyJS2">uglifyjs</a>. You may pass additional minification options by <a href="#integration-configuration-uglifyjs">uglifyjsOptions</a>.</p>
+
+<h4 id="optimizations-js-aggregation">JavaScript Aggregation</h4>
+<p>JavaScript files will be aggregated automatically if there is no other html element between the script tag. A <a href="#sio-ref-id">sio-ref-id</a> annotation will start a new aggregation.
+{% highlight html %}
+<script src="first-aggregation-1.js"></script>
+<script src="first-aggregation-2.js"></script>
+<link rel="shortcut icon" href="/favicon.ico">
+<script src="second-aggregation-1.js"></script>
+<script src="second-aggregation-2.js"></script>
+<script src="third-aggregation-1.js?sio-ref-id=third-aggregation-js"></script>
+<script src="third-aggregation-2.js"></script>
+{% endhighlight %}
+</p>
+
+<h4 id="sio-js-source-map">annotation: <code>sio-js-source-map</code></h4>
+<p>By default, <a href="http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/">JavaScript Source Maps</a> will be generated so you are able to debug the minified JavaScript. You may disable the source map if you don't want people to see your source code. e.g.
+{% highlight html %}
+<script src="secret-script-1.js?sio-js-source-map=disabled"></script>
+<script src="secret-script-2.js"></script>
+{% endhighlight %}
+</p>
+
+<h4 id="sio-js-embed">annotation: <code>sio-js-embed</code></h4>
+<p>Inline the JavaScript onto html page. Apply the annotation <code>sio-js-embed=enabled</code> to first link. e.g.
+{% highlight html %}
+<script src="embedded-with-script-tag-1.js?sio-js-embed=enabled"></script>
+<script src="embedded-with-script-tag-2.js"></script>
+{% endhighlight %}
+</p>
