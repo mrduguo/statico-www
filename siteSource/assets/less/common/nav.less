@@ -85,26 +85,9 @@
 
 
 .optimize-preview{
-  width: 100%;
-  position: relative;
-  border-radius: 5px;
-  background: #fff;
-
   input {
-    color: #333;
-    background: #fff;
-    font-size: 16px;
-    padding: 15px 15px;
-    display: inline-block;
-    width: 100%;
     height: 50px;
-    margin: 0;
-    float: left;
     border: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    border-radius: 5px;
   }
   input:focus {
     background-color: #eee;
@@ -113,23 +96,9 @@
   button.btn {
     color: #fff;
     background: @brand-primary;
-    font-size: 16px;
-    display: inline-block;
-    float: left;
     height: 50px;
-    margin: 0;
-    width: 100%;
-    border-radius: 5px;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
     border: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
   }
-
   button.btn span {
     padding: 16px;
   }
@@ -137,24 +106,16 @@
   button.btn:hover {
     background: darken(@brand-primary,10%);
   }
+}
 
-  .input-group-btn {
-    border-radius: 0 5px 5px 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: auto;
-  }
 
+.optimize-result{
+  margin-bottom: 250px;
   .previewResult {
-    margin-top: 30px;
+    margin-top: 20px;
     text-align: left;
   }
   .previewResult a{
     color:#3498db;
   }
-}
-
-.optimize-result{
-  margin-bottom: 200px;
 }
