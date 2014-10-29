@@ -1,24 +1,24 @@
 @import "../common/shared";
 
-html,body{
+html, body {
   height: 100%;
 }
-#top{
-  min-height: 550px;
-  height: 85%;
+
+#top {
+  min-height: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url(../../images/hero/bg.jpg);
-  margin-bottom:0;
+  margin-bottom: 0;
 
-  .hero{
+  .hero {
     text-align: center;
     color: #ffffff;
-    h1{
+    h1 {
       margin-top: 100px;
       font-size: 2.1em;
     }
-    h2{
+    h2 {
       font-size: 1.8em;
       line-height: 1.8em;
       margin-bottom: 100px;
@@ -26,47 +26,61 @@ html,body{
   }
 }
 
-.grid-icon{
+@media (min-height: 750px) {
+  #lifecycle .flat-title {
+    position: relative;
+    top:-80px;
+    margin-bottom:-80px;
+    background-color: rgba(48, 68, 87, 0.9);
+    height: 80px;
+    h2 {
+      padding: 20px 0 20px 0;
+      margin: 0;
+      line-height: 40px;
+    }
+  }
+}
+
+.grid-icon {
   display: inline-block;
-  &.pricing-1{
+  &.pricing-1 {
     width: 93px;
     height: 67px;
     background-image: url(../../images/icons/pricing-1.png?sio-auto-sprite=enabled);
   }
-  &.pricing-2{
+  &.pricing-2 {
     width: 93px;
     height: 67px;
     background-image: url(../../images/icons/pricing-2.png?sio-auto-sprite=enabled);
   }
-  &.pricing-3{
+  &.pricing-3 {
     width: 93px;
     height: 67px;
     background-image: url(../../images/icons/pricing-3.png?sio-auto-sprite=enabled);
   }
-  &.platform-windows{
+  &.platform-windows {
     width: 93px;
     height: 67px;
     background-image: url(../../images/icons/platform-windows.png?sio-auto-sprite=enabled);
   }
-  &.platform-mac{
+  &.platform-mac {
     width: 93px;
     height: 67px;
     background-image: url(../../images/icons/platform-mac.png?sio-auto-sprite=enabled);
   }
 }
 
-
-#get-started{
-  .col-sm-6{
-    ol,ul{
+#get-started {
+  .col-sm-6 {
+    ol, ul {
       text-align: left;
     }
-    ul{
-      padding:0 0 0 20px;
-      div{
+    ul {
+      padding: 0 0 0 20px;
+      div {
         max-width: 80%;
         overflow: scroll;
-        span{
+        span {
           width: 2000px;
           display: block;
         }
@@ -75,12 +89,12 @@ html,body{
   }
 }
 
-#customers{
-  .customer-logo{
+#customers {
+  .customer-logo {
     display: inline-block;
-    margin:0 0 10px 0;
+    margin: 0 0 10px 0;
   }
-  .customer-contact{
+  .customer-contact {
     border-radius: 40px;
     -webkit-border-radius: 40px;
     -moz-border-radius: 40px;
@@ -88,34 +102,34 @@ html,body{
     margin: 30px auto 5px auto;
   }
 
-  .customer-whatclinic{
+  .customer-whatclinic {
     width: 194px;
     height: 40px;
     background-image: url(../../images/customers/whatclinic.png?sio-auto-sprite=enabled);
   }
-  .customer-whatclinic-contact{
+  .customer-whatclinic-contact {
     width: 80px;
     height: 80px;
     background-image: url(../../images/customers/whatclinic-contact.png?sio-auto-sprite=enabled);
   }
 
-  .customer-goldenpages{
+  .customer-goldenpages {
     width: 217px;
     height: 40px;
     background-image: url(../../images/customers/goldenpages.png?sio-auto-sprite=enabled);
   }
-  .customer-goldenpages-contact{
+  .customer-goldenpages-contact {
     width: 80px;
     height: 80px;
     background-image: url(../../images/customers/goldenpages-contact.png?sio-auto-sprite=enabled);
   }
 
-  .customer-dracupuncture{
+  .customer-dracupuncture {
     width: 176px;
     height: 40px;
     background-image: url(../../images/customers/dracupuncture.png?sio-auto-sprite=enabled);
   }
-  .customer-dracupuncture-contact{
+  .customer-dracupuncture-contact {
     width: 80px;
     height: 80px;
     background-image: url(../../images/customers/dracupuncture-contact.png?sio-auto-sprite=enabled);
