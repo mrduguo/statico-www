@@ -1,4 +1,4 @@
-defaultTasks 'clean', 'jekyllBuild'
+defaultTasks 'clean', 'jekyllBuild', 'staticoOptimize'
 buildscript {
     repositories {
         mavenCentral()
@@ -32,8 +32,6 @@ task staticoOptimize(type: io.staticcdn.sdk.gradle.OptimizeTask) {
     ]
 }
 
-println('user.home:'+System.getProperty('user.home'))
-println('AWS_CONFIG_FILE:'+System.getenv('AWS_CONFIG_FILE'))
 task uploadFilesToS3(type: io.staticcdn.sdk.gradle.S3Task) {
     bucketName='www-statico-io'
     inputFolders=['build/statico-optimized-files/']
