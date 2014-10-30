@@ -17,7 +17,7 @@ $(function () {
         }
     }
 
-    if (homepageTitleAnimation.length && homepageTitleAnimation.css('position') == 'relative'){
+    if (homepageTitleAnimation.length){
         resizeTitle();
         $(window).scroll(function () {
             resizeTitle();

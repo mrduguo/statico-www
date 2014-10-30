@@ -8,7 +8,6 @@ permalink:        pretty
 # Server
 source:           siteSource
 destination:      build/jekyll-generated-site
-host:             www.statico.io.127.0.0.1.xip.io
 port:             9001
 baseurl:          ''
 url:              http://www.statico.io
