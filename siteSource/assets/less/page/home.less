@@ -27,21 +27,6 @@ html, body {
   }
 }
 
-@media (min-height: 750px) {
-  #lifecycle .flat-title {
-    position: relative;
-    top:-80px;
-    margin-bottom:-80px;
-    background-color: rgba(48, 68, 87, 0.9);
-    height: 80px;
-    h2 {
-      padding: 20px 0 20px 0;
-      margin: 0;
-      line-height: 40px;
-    }
-  }
-}
-
 .grid-icon {
   display: inline-block;
   &.pricing-1 {
@@ -135,4 +120,47 @@ html, body {
     height: 80px;
     background-image: url(../../images/customers/dracupuncture-contact.png?sio-auto-sprite=enabled);
   }
+}
+
+
+
+@media (max-width: 767px) {
+  #lifecycle .flat-title {
+    position: relative;
+    top:-80px;
+    margin-bottom:-80px;
+    background-color: rgba(48, 68, 87, 0.9);
+    height: 80px;
+    h2 {
+      padding: 20px 0 20px 0;
+      margin: 0;
+      line-height: 40px;
+    }
+  }
+}
+@media (max-width: 750px) {
+  #top {
+    background-image: url(../../images/hero/bg-small.jpg);
+    .hero {
+      h1 {
+        margin-top: 50px;
+        font-size: 1.4em;
+      }
+      h2 {
+        font-size: 1.1em;
+        line-height: 1.5em;
+        margin-bottom: 50px;
+      }
+    }
+  }
+  .flat-panel {
+    .flat-title {
+      h2 {
+        padding: 20px 0 20px 0;
+        font-size: 1.2em;
+        line-height: 1.2em;
+      }
+    }
+  }
+
 }
