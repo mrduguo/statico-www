@@ -43,14 +43,14 @@ html, body {
 
 #get-started {
   .col-sm-6 {
-    ol, ul {
+    ul {
       text-align: left;
     }
     ul {
       padding: 0 0 0 20px;
       div {
-        max-width: 80%;
-        overflow: scroll;
+        max-width: 90%;
+        overflow: hidden;
         span {
           width: 2000px;
           display: block;
@@ -139,41 +139,45 @@ html, body {
 
 
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   #top {
     background-image: url(../../images/hero/bg-small.jpg);
     .hero {
       h1 {
+        font-size: 1.9em;
+      }
+      h2 {
+        font-size: 1.6em;
+      }
+    }
+  }
+}
+
+@media (max-width: 568px) {
+  #top {
+    .hero {
+      h1 {
         margin-top: 50px;
         font-size: 1.4em;
+        font-weight: normal;
       }
       h2 {
         font-size: 1.1em;
         line-height: 1.5em;
         margin-bottom: 50px;
+        font-weight: normal;
+      }
+      .optimize-preview {
+        input {
+          font-size: 14px;
+        }
       }
     }
   }
-  #lifecycle .flat-title {
-    position: relative;
-    top:-80px;
-    margin-bottom:-80px;
-    background-color: rgba(48, 68, 87, 0.9);
-    height: 80px;
+  #lifecycle .flat-title, #customers .flat-title {
     h2 {
-      padding: 20px 0 20px 0;
-      margin: 0;
-      line-height: 40px;
+      font-size: 0.9em;
+      font-weight: normal;
     }
   }
-  .flat-panel {
-    .flat-title {
-      h2 {
-        padding: 20px 0 20px 0;
-        font-size: 1.2em;
-        line-height: 1.2em;
-      }
-    }
-  }
-
 }
