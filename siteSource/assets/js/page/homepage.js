@@ -14,6 +14,7 @@ $(function () {
                 marginBottom: -newHeight,
                 backgroundColor: 'rgba(48,68,87,' + (0.8 + movedPix / 1000) + ')'
             });
+            $('.optimize-result').css({marginBottom:newHeight+10});
         }
     }
 

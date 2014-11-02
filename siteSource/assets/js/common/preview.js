@@ -48,8 +48,10 @@ $(function () {
                 }).focus();
             }
 
-            SIO.accountDo(function(){
-                var ws = new SockJS('/web/preview');
+            SIO.accountDo(function(aid){
+                var previewStart=Date.now()
+                SIO.tracking.event('Preview Start',null,aid,urlToPreview);
+                var ws = new SockJS(SIO.ajaxBaseUrl+'/web/preview');
                 ws.onopen = function () {
                     showResult('<span id="optimiseMsgs"></span>', 'info');
                     showMsg('connecting...')
@@ -61,7 +63,7 @@ $(function () {
                             autoSpriteMinFileSize: 1025,
                             autoSpriteMaxFileSize: 10240
                         },
-                        paths: {urlToPreview: urlToPreview}
+                        paths: {urlToPreview: urlToPreview,aid:aid}
                     }));
 
                 };
@@ -86,9 +88,11 @@ $(function () {
                     if (isSuccess) {
                         var resultText = '<div class="optimise-msg">This is just a preview! Please keep touch with us to get your site optimized with best result:</div><div class="optimise-msg feed-back-email-form"><input type="text" class="form-control" name="feedBackEmail" placeholder="your email and a message"/></div><div class="optimise-msg">Thanks!</div>';
                         showResult(resultText, 'success');
+                        SIO.tracking.event('Preview Success',urlToPreview,aid,Date.now()-previewStart);
                     }else{
                         var resultText = '<div class="optimise-msg">Woops! The toy didn\'t work this time. Please keep touch with us and will let you known when it\'s been fixed:</div><div class="optimise-msg feed-back-email-form"><input type="text" class="form-control" name="feedBackEmail" placeholder="your email and a message"/></div><div class="optimise-msg">Thanks!</div>';
                         showResult(resultText, 'danger');
+                        SIO.tracking.event('Preview Failed',urlToPreview,aid,Date.now()-previewStart);
                     }
                     activeEmailForm();
                     SIO.accountSendEmail(

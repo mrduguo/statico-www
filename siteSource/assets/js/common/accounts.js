@@ -1,24 +1,26 @@
 if (typeof OPTIMISED === 'undefined') OPTIMISED = false;
 var SIO=SIO||{};
+SIO.ajaxBaseUrl='https://ajax.staticcdn.io'
 $(function () {
-//    if (OPTIMISED) {
-//        if(location.href.indexOf('https://www.statico.io')!=0){
-//            location.href='https://www.statico.io'+location.pathname;
-//        }
-//    }
+    if (!OPTIMISED) {
+        SIO.ajaxBaseUrl='http://localhost:7110'
+    }
 
     SIO.accountSendEmail=function(from,subject,msg,successAction,failedAction){
-        $.ajax({
-            type: "POST",
-            url: "/web/accounts/contact-team",
-            data: { from: from, subject: subject, msg: msg },
-            success: function (jsonResult) {
-                successAction(jsonResult);
-            },
-            error: function (jqXHR, textStatus) {
-                failedAction(jqXHR,textStatus);
-            }
-        });
+        SIO.accountDo(function(aid){
+            $.ajax({
+                type: "POST",
+                url: SIO.ajaxBaseUrl+"/web/accounts/contact-team",
+                data: { from: from, subject: subject, msg: msg,aid:aid },
+                success: function (jsonResult) {
+                    SIO.tracking.event('Contact Team',subject,aid);
+                    successAction(jsonResult);
+                },
+                error: function (jqXHR, textStatus) {
+                    failedAction(jqXHR,textStatus);
+                }
+            });
+        })
     }
     $('.signUp').mouseover(function () {
         var signUpButton = $(this);
@@ -50,26 +52,19 @@ $(function () {
     });
 
     SIO.accountDo=function(action){
-        var getCookie=function (cname)
-        {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for(var i=0; i<ca.length; i++)
-            {
-                var c = ca[i].trim();
-                if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-            }
-            return null;
-        }
-        if(getCookie('aid')){
-            action()
+        if(localStorage && localStorage.getItem("aid")){
+            action(localStorage.getItem("aid"))
         }else{
             $.ajax({
                 type: "POST",
-                url: "/web/accounts/aid",
+                url: SIO.ajaxBaseUrl+"/web/accounts/aid",
                 data: { subject: 'create aid' },
                 success: function (jsonResult) {
-                    action(jsonResult);
+                    if(localStorage){
+                        localStorage.setItem("aid",jsonResult.aid)
+                    }
+                    SIO.tracking.event('Created Account',null,jsonResult.aid);
+                    action(jsonResult.aid);
                 },
                 error: function (jqXHR, textStatus) {
                     action(jqXHR, textStatus);
