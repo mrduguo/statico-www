@@ -17,10 +17,78 @@
     You may inline older web font format TTF to support older Android browsers on top of WOFF supported browsers.
 </p>
 
-<!--<h4 id="sio-progressive-load">annotation: <code>sio-progressive-load</code></h4>-->
-<!--<p>-->
-    <!--Progressive load and render the web font. e.g.-->
-<!--{% highlight html %}-->
-<!--<link href='https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900&sio-progressive-load=enabled' rel='stylesheet' type='text/css'>-->
-<!--{% endhighlight %}-->
-<!--</p>-->
+<h4 id="sio-progressive-load">annotation: <code>sio-progressive-load</code></h4>
+<p>
+    Progressive load and render the web font.
+<h5 id="sio-progressive-load-google-font">Google fonts example</h5>
+Just add <code>&sio-progressive-load=enabled</code> to your google font link. e.g.
+{% highlight html %}
+<link href='//fonts.googleapis.com/css?family=Lato:400,700&sio-progressive-load=enabled' rel='stylesheet' type='text/css'>
+{% endhighlight %}
+
+It will optimized as:
+{% highlight html %}
+<script>
+    /*
+     inspired from https://github.com/filamentgroup/loadCSS
+     */
+    (function () {
+        var href = '//fonts.googleapis.com/css?family=Lato:400,700';
+        var ss = document.createElement("link");
+        ss.rel = "stylesheet";
+        ss.href = href;
+        ss.onload = function () {
+            var sheets = document.styleSheets;
+            for (var i = 0; i < sheets.length; i++) {
+                if (sheets[ i ].href && sheets[ i ].href.indexOf(href) > -1) {
+                    ss.media = "all";
+                    return;
+                }
+            }
+        }
+        ss.media = "only x";
+        var ref = document.getElementsByTagName("script")[ 0 ];
+        ref.parentNode.insertBefore(ss, ref);
+    })();
+</script>
+<noscript>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:400,700"/>
+</noscript>
+{% endhighlight %}
+
+<h5 id="sio-progressive-load-inline-fonts">Custom fonts example</h5>
+Just add <code>sio-progressive-load=enabled</code> to your custom fonts css, all other standard annotation can be used in the css file. e.g.
+{% highlight html %}
+<link href='lato-font.css?sio-progressive-load=enabled' rel='stylesheet' type='text/css'>
+{% endhighlight %}
+
+It will optimized as:
+{% highlight html %}
+<script>
+    /*
+     inspired from https://github.com/filamentgroup/loadCSS
+     */
+    (function () {
+        var href = '//d310mzohrxmrzp.cloudfront.net/fb00c3edf7db76628b756ee5ffa19c6c.css';
+        var ss = document.createElement("link");
+        ss.rel = "stylesheet";
+        ss.href = href;
+        ss.onload = function () {
+            var sheets = document.styleSheets;
+            for (var i = 0; i < sheets.length; i++) {
+                if (sheets[ i ].href && sheets[ i ].href.indexOf(href) > -1) {
+                    ss.media = "all";
+                    return;
+                }
+            }
+        }
+        ss.media = "only x";
+        var ref = document.getElementsByTagName("script")[ 0 ];
+        ref.parentNode.insertBefore(ss, ref);
+    })();
+</script>
+<noscript>
+    <link rel="stylesheet" type="text/css" href="//d310mzohrxmrzp.cloudfront.net/fb00c3edf7db76628b756ee5ffa19c6c.css"/>
+</noscript>
+{% endhighlight %}
+</p>

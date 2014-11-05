@@ -1,17 +1,22 @@
 @import "../common/shared";
 @import "../../vendors/ladda-20140414/ladda-themeless-20140414.css";
 
-html, body {
+html, body{
   height: 100%;
+}
+
+body{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(../../images/hero/bg-small.jpg?sio-data-url=enabled);
 }
 
 #top {
   min-height: 100%;
+  margin-bottom: 0;
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url(../../images/hero/bg.jpg);
-  margin-bottom: 0;
-
   .hero {
     text-align: center;
     color: #ffffff;
@@ -26,6 +31,7 @@ html, body {
     }
   }
 }
+
 
 
 #lifecycle .flat-title {
@@ -141,7 +147,6 @@ html, body {
 
 @media (max-width: 768px) {
   #top {
-    background-image: url(../../images/hero/bg-small.jpg);
     .hero {
       h1 {
         font-size: 1.9em;
