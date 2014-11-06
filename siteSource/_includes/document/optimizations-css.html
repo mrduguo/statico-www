@@ -4,7 +4,7 @@
 <p>CSS will be minified with <a href="https://github.com/jakubpawlowicz/clean-css">clean-css</a>. You may pass additional minification options by <a href="#integration-configuration-clean-css">cleancssOptions</a>.</p>
 
 <h4 id="optimizations-css-aggregation">CSS Aggregation</h4>
-<p>CSS files will be aggregated automatically if there is no other html element between the CSS link tag. CSS <code>@import</code> rule will treated as aggregation to inline to the parent CSS file. A <a href="#sio-ref-id">sio-ref-id</a> annotation will start a new aggregation.
+<p>CSS files will be aggregated automatically if there is no other html element between the CSS link tag. CSS <code>@import</code> rule will treated as aggregation to inline to the parent CSS file. Any sio annotation will start a new aggregation.
 {% highlight html %}
 <link rel="stylesheet" type="text/css" href="first-aggregation-1.css"/>
 <link rel="stylesheet" type="text/css" href="first-aggregation-2.css"/>

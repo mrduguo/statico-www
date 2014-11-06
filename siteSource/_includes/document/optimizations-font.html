@@ -37,18 +37,21 @@ It will optimized as:
         var ss = document.createElement("link");
         ss.rel = "stylesheet";
         ss.href = href;
-        ss.onload = function () {
-            var sheets = document.styleSheets;
+        ss.media = "only x";
+        var ref = document.getElementsByTagName("script")[ 0 ];
+        ref.parentNode.insertBefore(ss, ref);
+
+        var sheets = document.styleSheets;
+        function toggleMedia() {
             for (var i = 0; i < sheets.length; i++) {
                 if (sheets[ i ].href && sheets[ i ].href.indexOf(href) > -1) {
                     ss.media = "all";
                     return;
                 }
             }
+            setTimeout(toggleMedia,10);
         }
-        ss.media = "only x";
-        var ref = document.getElementsByTagName("script")[ 0 ];
-        ref.parentNode.insertBefore(ss, ref);
+        toggleMedia();
     })();
 </script>
 <noscript>
@@ -73,18 +76,21 @@ It will optimized as:
         var ss = document.createElement("link");
         ss.rel = "stylesheet";
         ss.href = href;
-        ss.onload = function () {
-            var sheets = document.styleSheets;
+        ss.media = "only x";
+        var ref = document.getElementsByTagName("script")[ 0 ];
+        ref.parentNode.insertBefore(ss, ref);
+
+        var sheets = document.styleSheets;
+        function toggleMedia() {
             for (var i = 0; i < sheets.length; i++) {
                 if (sheets[ i ].href && sheets[ i ].href.indexOf(href) > -1) {
                     ss.media = "all";
                     return;
                 }
             }
+            setTimeout(toggleMedia,10);
         }
-        ss.media = "only x";
-        var ref = document.getElementsByTagName("script")[ 0 ];
-        ref.parentNode.insertBefore(ss, ref);
+        toggleMedia();
     })();
 </script>
 <noscript>

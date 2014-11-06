@@ -4,7 +4,7 @@
 <p>JavaScript will be minified with <a href="https://github.com/mishoo/UglifyJS2">uglifyjs</a>. You may pass additional minification options by <a href="#integration-configuration-uglifyjs">uglifyjsOptions</a>.</p>
 
 <h4 id="optimizations-js-aggregation">JavaScript Aggregation</h4>
-<p>JavaScript files will be aggregated automatically if there is no other html element between the script tag. A <a href="#sio-ref-id">sio-ref-id</a> annotation will start a new aggregation.
+<p>JavaScript files will be aggregated automatically if there is no other html element between the script tag. Any sio annotation will start a new aggregation.
 {% highlight html %}
 <script src="first-aggregation-1.js"></script>
 <script src="first-aggregation-2.js"></script>
