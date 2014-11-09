@@ -3,7 +3,7 @@ var SIO=SIO||{};
 SIO.ajaxBaseUrl='https://ajax.staticcdn.io'
 $(function () {
     if (!OPTIMISED) {
-//        SIO.ajaxBaseUrl='http://localhost:7110'
+        SIO.ajaxBaseUrl='http://localhost:7110'
     }
 
     SIO.accountSendEmail=function(from,subject,msg,successAction,failedAction){

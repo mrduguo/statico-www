@@ -28,8 +28,7 @@
 {% highlight sh %}
 curl -O https://repo1.maven.org/maven2/io/staticcdn/sdk/staticcdn-sdk-standalone-optimizer/{{ site.statico.sdk.version }}/staticcdn-sdk-standalone-optimizer-{{ site.statico.sdk.version }}.zip
 unzip staticcdn-sdk-standalone-optimizer-{{ site.statico.sdk.version }}.zip
-cd staticcdn-sdk-standalone-optimizer-{{ site.statico.sdk.version }}
-./optimizer
+./staticcdn-sdk-standalone-optimizer-{{ site.statico.sdk.version }}/optimizer
 # OUTPUT:
 # optimized session 94ca5ddb12cf730f139515b272a4c36f to ***/build/statico-optimized-files/hello-world.html
 
@@ -286,6 +285,14 @@ optimized=//d310mzohrxmrzp.cloudfront.net/142268d86c7b3721b646ed83b0383965.html
                 <td>--s0</td>
                 <td>
                     Used for <a href="https://github.com/jakubpawlowicz/clean-css#how-to-use-clean-css-cli">clean-css options</a> to minify CSS.
+                </td>
+            </tr>
+            <tr>
+                <td id="integration-configuration-uncss">uncssOptions</td>
+                <td>String</td>
+                <td>null</td>
+                <td>
+                    Used for <a href="https://github.com/giakki/uncss">uncss options</a> to remove unused CSS.
                 </td>
             </tr>
             <tr>

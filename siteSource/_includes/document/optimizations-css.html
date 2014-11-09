@@ -31,3 +31,11 @@
 <link rel="stylesheet" type="text/css" href="embedded-with-style-tag-2.css"/>
 {% endhighlight %}
 </p>
+
+<h4 id="sio-css-uncss">annotation: <code>sio-css-uncss</code></h4>
+<p>Use <a href="https://github.com/giakki/uncss">uncss</a> to remove unused css rules. You may pass additional options by <a href="#integration-configuration-uncss">uncssOptions</a>. Additional selectors can be kept with a special script tag as following example. e.g.
+{% highlight html %}
+<link rel="stylesheet/css" type="text/css" href="to-be-reduced?sio-css-uncss=enabled"/>
+<script type="text/uncss" src="uncss-selectors-to-keep.html"></script>
+{% endhighlight %}
+</p>

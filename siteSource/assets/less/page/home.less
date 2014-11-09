@@ -1,5 +1,4 @@
 @import "../common/shared";
-@import "../../vendors/ladda-20140414/ladda-themeless-20140414.css";
 
 html, body{
   height: 100%;
@@ -21,13 +20,12 @@ body{
     text-align: center;
     color: #ffffff;
     h1 {
-      margin-top: 100px;
+      margin: 150px 0 150px 0;
       font-size: 2.1em;
-    }
-    h2 {
-      font-size: 1.8em;
-      line-height: 1.8em;
-      margin-bottom: 100px;
+      text-transform: uppercase;
+      span{
+        color: @brand-primary;
+      }
     }
   }
 }
@@ -143,34 +141,13 @@ body{
 }
 
 
-
-
-@media (max-width: 768px) {
-  #top {
-    .hero {
-      h1 {
-        font-size: 1.9em;
-      }
-      h2 {
-        font-size: 1.6em;
-      }
-    }
-  }
-}
-
 @media (max-width: 667px) {
   #top {
     .hero {
       h1 {
-        margin-top: 50px;
+        margin: 50px auto 50px auto;
         font-size: 1.4em;
-        font-weight: normal;
-      }
-      h2 {
-        font-size: 1.1em;
-        line-height: 1.5em;
-        margin-bottom: 50px;
-        font-weight: normal;
+        width: 200px;
       }
       .optimize-preview {
         input {

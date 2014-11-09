@@ -4,7 +4,7 @@
 <meta name="description"
       content="statico.io, a static assets optimization cloud service, the power tool for developers to deliver sub second desktop and mobile web experience">
 <meta name="keywords"
-      content="HTML, CSS, JS, JavaScript, bootstrap, front-end, frontend, web development, optimization, optimize, cleancss, lesscss, uglifyjs">
+      content="HTML, CSS, JS, JavaScript, bootstrap, front end, front-end, frontend, web development, optimization, optimize, cleancss, uncss, lesscss, uglifyjs">
 <meta name="author" content="Guo Du and contributors">
 
 <title>
@@ -18,10 +18,14 @@
 <script type="text/javascript" src="/assets/js/common/tracking.js?sio-js-embed=enabled"></script>
 
 <!-- stylesheet -->
-<link rel="stylesheet/less" type="text/css" href="/assets/less/page/{{ page.layout }}.less?sio-css-embed=enabled"/>
+<link rel="stylesheet/less" type="text/css" href="/assets/less/page/{{ page.layout }}.less?sio-css-embed=enabled&sio-css-uncss=enabled"/>
+{% if page.layout == "home" %}
+<link rel="stylesheet/less" type="text/css" href="/assets/vendors/ladda-20140414/ladda-themeless-20140414.css?sio-css-embed=enabled"/>
+{% endif %}
 <script type="text/javascript" src="/assets/js/common/less-settings.js?sio-local-development-only=enabled"></script>
 <script type="text/javascript" src="/assets/vendors/less-1.7.4/less.js?sio-local-development-only=enabled"></script>
 <link href='/assets/vendors/font-lato-20141105/font-lato-20141105.css?sio-progressive-load=enabled' rel='stylesheet' type='text/css'>
+<script type="text/uncss" src="/assets/html/uncss-selectors-to-keep.html"></script>
 
 <!-- Favicons -->
 <link rel="icon" href="/favicon.ico?sio-use-cdn=enabled">

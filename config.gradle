@@ -27,13 +27,13 @@ task staticoOptimize(type: io.staticcdn.sdk.gradle.OptimizeTask) {
             inputWwwRoots        : ['build/jekyll-generated-site/'],
             outputWwwRoot        : 'build/statico-optimized-files/',
             inputFilePathPatterns: [
-                    '^.*html$',
+                    '^.*index.html$',
             ]
     ]
 }
 
 task uploadFilesToS3(type: io.staticcdn.sdk.gradle.S3Task) {
     bucketName='www-statico-io'
-    inputFolders=['build/statico-optimized-files/']
-    inputFilePathPatterns=['.*html$']
+    inputFolders=['build/statico-optimized-files/','build/jekyll-generated-site/']
+    inputFilePathPatterns=['.*index.html$','/sitemap.xml']
 }
