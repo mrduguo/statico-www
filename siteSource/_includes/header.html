@@ -8,13 +8,8 @@
 <meta name="author" content="Guo Du and contributors">
 
 <title>
-{% if page.layout == "home" %}
-    {{ page.title }}
-{% else %}
-    {{ page.title }} &middot; statico.io
-{% endif %}
+    statico.io &middot; {{ page.title }}{% if page.lead %} &middot; {{ page.lead }}{% endif %}
 </title>
-
 <script type="text/javascript" src="/assets/js/common/tracking.js?sio-js-embed=enabled"></script>
 
 <!-- stylesheet -->

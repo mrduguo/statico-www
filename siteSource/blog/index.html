@@ -1,0 +1,16 @@
+---
+layout: blog
+title: Blog
+lead: Make the Web Faster
+---
+
+<div class="posts">
+    <ul>
+        {% for post in site.posts %}
+        <li>
+            <a href="{{ post.url }}">{{ post.title }} - {{ post.lead }}</a>
+            {{ post.excerpt }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>

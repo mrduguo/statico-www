@@ -3,7 +3,12 @@ markdown:         kramdown
 highlighter:      rouge
 
 # Permalinks
-permalink:        pretty
+#permalink:        pretty
+permalink: /blog/:title/
+#relative_permalinks: true
+#paginate_path: "/blog/page:num"
+#paginate: 5
+#destination: _site/blog
 
 # Server
 source:           siteSource

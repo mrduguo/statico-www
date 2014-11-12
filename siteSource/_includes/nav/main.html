@@ -14,11 +14,11 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="/#pricing">Pricing</a>
-                </li>
-                <!--li{% if page.slug == "blog" %} class="active"{% endif %}>
-                <a href="/blog/">Blog</a>
-                </li-->
-                <li class="dropdown {% if page.slug == "document" %}active{% endif %}">
+                </li>{% if page.layout == "blog" %}
+                <li class="dropdown {% if page.layout == "blog" %}active{% endif %}">
+                    <a href="/blog/">Blog</a>
+                </li>{% endif %}
+                <li class="dropdown {% if page.layout == "document" %}active{% endif %}">
                 <a href="/document/">Document</a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="/document/#overview">Overview</a></li>

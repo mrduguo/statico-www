@@ -1,0 +1,62 @@
+---
+layout: post
+title: Introduce statico
+lead:   Front end optimization as a service
+comments: true
+---
+<div>
+    <h1 id="overview" class="page-header">Overview</h1>
+
+    <p class="lead">Faster web deliver delightful user expedience. statico was created to make the complicated optimization processes simple and easy to speed up web. It's a tool developed by developer for developer. Hope you enjoy!</p>
+
+    <h3 id="hello-world">Hello World</h3>
+    <p>A simple web page (<a href="https://github.com/mrduguo/staticcdn-sdk/tree/master/samples/html-standalone">source code on github</a>) contain CSS, images and JavaScripts demonstrate how optimization works in action:</p>
+    {% highlight text %}
+    wwwroot
+    ├── index.html
+    └── assets
+    ├── css
+    │   └── homepage.css
+    ├── images
+    │   └── logo.png
+    ├── js
+    │   └── homepage.js
+    └── vendors
+    └── jquery-1.11.0
+    └── jquery-1.11.0.js
+    {% endhighlight %}
+
+    <p>Next tell the statico cloud service what to optimize in <code>config.gradle</code>:</p>
+    {% highlight groovy %}
+    statico {
+    inputWwwRoots = ['wwwroot/']
+    outputWwwRoot = 'build/optimized-files/'
+    inputFilePathPatterns = [
+    '/index.html'
+    ]
+    }
+    {% endhighlight %}
+
+    <p>Then you will get the optimized <a href="http://www.statico.io/preview/c9337649e26015412b5e846f37185f44.html">index.html</a> to store in your server. All referenced static assets will be stored in S3 and delivered by CloudFront:</p>
+    {% highlight html %}
+    <html> <head> <title>hello world - statico.io</title> <style type="text/css">body{background-color:lightgrey}.logo-icon{background-image:url(data:image/png;base64,***);width:162px;height:30px;display:inline-block}.css-text{color:#00f}</style></head> <body> <i class="logo-icon"></i> <h1>Hello statico</h1> <div class="css-text">My favorite color is blue</div> <script type="text/javascript" src="//d310mzohrxmrzp.cloudfront.net/bc73ad7c2f58bcb033825e090a325947.js"></script> </body> </html>
+    {% endhighlight %}
+    <p>
+        The result from webpagetest.org speed index: <a href="http://www.webpagetest.org/video/compare.php?ival=100&tests=141006_FF_12JR-r:3-c:0-e:0.8,141006_FK_12JN-r:2-c:0-e:0.3">original 701 vs 300 optimized</a>
+    </p>
+    <p>
+        <img src="/assets/images/samples/sample-html-original-vs-optimized.gif?sio-use-cdn=enabled" width="100%"/>
+    </p>
+
+    <h3 id="best-practices">Best Practices</h3>
+    <p>
+        statico is a lossless optimization solution, we made it easy to apply the optimization best practices. There are well known <a href="http://stevesouders.com/examples/rules.php">high performance web sites</a> <a href="http://www.sitespeed.io/rules/">best practices</a> which improve render performance. The most commonly ignored rules is <a href="http://stevesouders.com/examples/rule-js-bottom.php">Move scripts to the <code>Bottom</code> of the page</a>. For web site, I strongly suggest to avoid rely on JavaScript for rendering main content.
+    <p>
+        There are ideas which you can play to get better rendering performance:
+    <ul>
+        <li><a href="http://www.feedthebot.com/pagespeed/critical-render-path.html">Critical Rendering Path</a> by Patrick Sexton</li>
+        <li><a href="https://speakerdeck.com/patrickhamann/css-and-the-critical-path">CSS and the critical path</a> by Patrick Hamann</li>
+        <li><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp?hl=en">Analyzing Critical Rendering Path Performance</a> from Google</li>
+    </ul>
+    </p>
+</div>
