@@ -34,6 +34,7 @@ task staticoOptimize(type: io.staticcdn.sdk.gradle.OptimizeTask) {
 
 task uploadFilesToS3(type: io.staticcdn.sdk.gradle.S3Task) {
     bucketName='www-statico-io'
+    cacheControlHeader='public, max-age=7200'
     inputFolders=['build/statico-optimized-files/','build/jekyll-generated-site/']
     inputFilePathPatterns=['.*index.html$','.*.xml']
 }
