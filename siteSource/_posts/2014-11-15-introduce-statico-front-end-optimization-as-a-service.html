@@ -3,60 +3,122 @@ layout: post
 title: Introduce statico
 lead:   Front end optimization as a service
 comments: true
+category : blog
+by_author : 'by <a href="https://twitter.com/mrduguo">Guo Du</a>'
 ---
 <div>
-    <h1 id="overview" class="page-header">Overview</h1>
-
-    <p class="lead">Faster web deliver delightful user expedience. statico was created to make the complicated optimization processes simple and easy to speed up web. It's a tool developed by developer for developer. Hope you enjoy!</p>
-
-    <h3 id="hello-world">Hello World</h3>
-    <p>A simple web page (<a href="https://github.com/mrduguo/staticcdn-sdk/tree/master/samples/html-standalone">source code on github</a>) contain CSS, images and JavaScripts demonstrate how optimization works in action:</p>
-    {% highlight text %}
-    wwwroot
-    ├── index.html
-    └── assets
-    ├── css
-    │   └── homepage.css
-    ├── images
-    │   └── logo.png
-    ├── js
-    │   └── homepage.js
-    └── vendors
-    └── jquery-1.11.0
-    └── jquery-1.11.0.js
-    {% endhighlight %}
-
-    <p>Next tell the statico cloud service what to optimize in <code>config.gradle</code>:</p>
-    {% highlight groovy %}
-    statico {
-    inputWwwRoots = ['wwwroot/']
-    outputWwwRoot = 'build/optimized-files/'
-    inputFilePathPatterns = [
-    '/index.html'
-    ]
-    }
-    {% endhighlight %}
-
-    <p>Then you will get the optimized <a href="http://www.statico.io/preview/c9337649e26015412b5e846f37185f44.html">index.html</a> to store in your server. All referenced static assets will be stored in S3 and delivered by CloudFront:</p>
-    {% highlight html %}
-    <html> <head> <title>hello world - statico.io</title> <style type="text/css">body{background-color:lightgrey}.logo-icon{background-image:url(data:image/png;base64,***);width:162px;height:30px;display:inline-block}.css-text{color:#00f}</style></head> <body> <i class="logo-icon"></i> <h1>Hello statico</h1> <div class="css-text">My favorite color is blue</div> <script type="text/javascript" src="//d310mzohrxmrzp.cloudfront.net/bc73ad7c2f58bcb033825e090a325947.js"></script> </body> </html>
-    {% endhighlight %}
-    <p>
-        The result from webpagetest.org speed index: <a href="http://www.webpagetest.org/video/compare.php?ival=100&tests=141006_FF_12JR-r:3-c:0-e:0.8,141006_FK_12JN-r:2-c:0-e:0.3">original 701 vs 300 optimized</a>
+    <p class="lead">
+        Faster web deliver delightful user expedience. It lead to higher visitor engagement, retention and conversions.
     </p>
-    <p>
-        <img src="/assets/images/samples/sample-html-original-vs-optimized.gif?sio-use-cdn=enabled" width="100%"/>
-    </p>
+    <div class="row">
+        <div class="col-sm-3">
+        </div>
+        <div class="col-sm-6">
+            <div>
+                <img src="/assets/images/posts/introduce-statico/backend-frontend.png?sio-use-cdn=enabled"
+                     style="width: 100%;"/>
+            </div>
+            <div>
+                <img src="/assets/images/posts/introduce-statico/steve-souders.jpg?sio-use-cdn=enabled" style="width: 80px;height:80px;border-radius: 40px;
+-webkit-border-radius: 40px;
+-moz-border-radius: 40px;
+float: left;margin: 10px 10px;" title="Steve Souders">
 
-    <h3 id="best-practices">Best Practices</h3>
-    <p>
-        statico is a lossless optimization solution, we made it easy to apply the optimization best practices. There are well known <a href="http://stevesouders.com/examples/rules.php">high performance web sites</a> <a href="http://www.sitespeed.io/rules/">best practices</a> which improve render performance. The most commonly ignored rules is <a href="http://stevesouders.com/examples/rule-js-bottom.php">Move scripts to the <code>Bottom</code> of the page</a>. For web site, I strongly suggest to avoid rely on JavaScript for rendering main content.
-    <p>
-        There are ideas which you can play to get better rendering performance:
-    <ul>
-        <li><a href="http://www.feedthebot.com/pagespeed/critical-render-path.html">Critical Rendering Path</a> by Patrick Sexton</li>
-        <li><a href="https://speakerdeck.com/patrickhamann/css-and-the-critical-path">CSS and the critical path</a> by Patrick Hamann</li>
-        <li><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp?hl=en">Analyzing Critical Rendering Path Performance</a> from Google</li>
-    </ul>
-    </p>
+                <div style="padding: 20px 0 0 0;">80-90% of the end-user response time is spent on the front end.</div>
+                <div>Start there.</div>
+                <div>-<a href="http://www.stevesouders.com/blog/2012/02/10/the-performance-golden-rule/">Steve
+                    Souders</a></div>
+            </div>
+
+        </div>
+        <div class="col-sm-3">
+        </div>
+    </div>
 </div>
+<h2 id="the-challenge">The challenge</h2>
+<p>
+    It is complicated and require heavy engineering effort to make the web fast.
+</p>
+<p>
+    As a web designer or front end developer, you may well know what need to be done and open source tools can be used
+    to make it fast. In reality, there are very few websites able to achieve best front end performance. Even for big
+    brands such as ebay with professional teams, they still perform poor on front end due to the complicity involved
+    with optimization and integration of development process.
+</p>
+        <p>
+            Given listing site landing page comparison as an example, WhatClinic.com user will see in 0.5 second while ebay.com user have to wait for 3.5 seconds in webpagetest.org <a href="http://www.webpagetest.org/video/compare.php?ival=100&tests=141116_GC_JRT-r:2-c:0-e:2.0,141116_EH_JSP-r:1-c:0-e:3.6">tests</a> with standard cable network profile.
+</p>
+<h2 id="out-solution">Our solution: front end optimization as a service</h2>
+<p>
+    To solve the problem to make the web faster, we created statico.io as a cloud service to make front end optimization easy and simple as 1, 2, 3:
+
+<div class="row">
+    <div class="col-sm-6">1. Annotate your static assets e.g.
+        <ul>
+            <li>inline css
+                <ul><li><code>critical.css?sio-css-embed=enabled</code></li></ul>
+            </li>
+            <li>remove unused css
+                <ul><li><code>clean.css?sio-css-uncss=enabled</code></li></ul>
+            </li>
+            <li>progressive render web fonts
+                <ul><li><code>cool-fonts.css?sio-progressive-load=enabled</code></li></ul>
+            </li>
+            <li>inline image
+                <ul><li><code>url(logo.png?sio-data-url=enabled)</code></li></ul>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-4">2. Optimize with SDK automatically
+        <ol>
+            <li>scan your source code</li>
+            <li>upload all referenced files</li>
+            <li>optimize based on annotation</li>
+            <li>give back optimized file with external referenced resource delivered by CDN</li>
+            <li>store the optimized file to your server</li>
+        </ol>
+    </div>
+    <div class="col-sm-2">3. Enjoy
+        <ul>
+            <li>Speedy!</li>
+        </ul>
+    </div>
+</div>
+</p>
+<h2 id="the-result">The result: as fast as google homepage</h2>
+<p>
+    For a fair complex web page:
+    <ul>
+        <li>HTTPS</li>
+        <li>bootstrap responsive design</li>
+        <li>hero image</li>
+        <li>google web fonts lato</li>
+        <li>font awesome icons</li>
+        <li>png sprite icons</li>
+        <li>jquery and websocket</li>
+    </ul>
+
+    User will see the page in 0.5 seconds with webpagetest.org <a href="http://www.webpagetest.org/video/compare.php?ival=100&tests=141116_7R_JJA-r:3-c:0-e:0.5,141116_WR_JMR-r:1-c:0-e:0.5">tests</a> speed index 594:
+</p>
+        <p>
+
+<div class="row">
+    <div class="col-sm-9">
+        <video autoplay="autoplay" loop="loop" style="width:100%; height:100%">
+            <source id="mp4" src="/assets/images/posts/introduce-statico/statico-vs-google.mp4?sio-use-cdn=enabled" type="video/mp4">
+        </video>
+    </div>
+    <div class="col-sm-3">
+    </div>
+</div>
+
+</p>
+<h2 id="a-service-for-everyone">A service for everyone</h2>
+<p>
+    It's free unless used for commercial site with more than 10,000 monthly unique visits. It's a tool developed by
+    developer for developer. Web is evolve fast, optimization is a journey and hope statico will be your good friend
+    along the way!
+</p>
+<p>
+    <a href="/document/" class="btn btn-primary get-started-blog-introduce">Get started without sign up</a>
+</p>

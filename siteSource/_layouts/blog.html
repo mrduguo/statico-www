@@ -17,6 +17,12 @@
 
 <section class="content-body">
     <div class="container">
+        {% if page.date %}
+            <div class="date-and-author">
+                {{ page.date | date_to_string }}
+                {% if page.by_author %} {{ page.by_author }}{% endif %}
+            </div>
+        {% endif %}
         {{ content }}
     </div>
 </section>
