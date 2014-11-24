@@ -12,6 +12,7 @@ It require a standard java and ruby development environments. Here are the thing
 * [Ruby 2+](https://www.ruby-lang.org/en/installation/)
  * Verify your installation: `ruby -v`
 * [Jekyll with rouge](http://jekyllrb.com/docs/installation/)
+ * Installation: `gem install jekyll rouge`
  * Verify your installation: `jekyll -v`
  * Windows user may need additional [steps](http://jekyllrb.com/docs/windows/) to install
 
@@ -24,7 +25,7 @@ Build Commands
  * optimize generated site
 * Development: `./optimizer dev`
  * shortcut to run `jekyll serve --watch` for local development
- * you may visit the local site at [http://0.0.0.0:7112/](http://0.0.0.0:7112/)
+ * you may visit the local site at [http://localhost:7112/](http://localhost:7112/)
 * Release: `./optimizer release`
  * clean build folder
  * generate jekyll static site

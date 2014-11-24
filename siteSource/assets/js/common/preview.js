@@ -34,11 +34,11 @@ $(function () {
                 $('input',emailFormHtml).keypress(function (e) {
                     if (e.which == '13') {
                         SIO.accountSendEmail(
-                            $('input', emailFormHtml).val(),
+                            $('input', emailFormHtml).val()+' feedback',
                             'feedback success: '+isSuccess,
                             JSON.stringify(msgs),
                             function () {
-                                emailFormHtml.html('<div>We got it!</div></div>');
+                                emailFormHtml.html('<div>We got it and will keep in touch with you shortly!</div></div>');
                             },
                             function () {
                                 emailFormHtml.html('<div><b>We are sorry!</b><div>There is a problem . Please contact us by email: <a href="mailto:team@statico.io" class="alert-link">team@statico.io</a></div>');
@@ -96,7 +96,7 @@ $(function () {
                     }
                     activeEmailForm();
                     SIO.accountSendEmail(
-                        null,
+                        'benchmark result',
                             'optimise finish: '+isSuccess,
                         JSON.stringify(msgs),
                         function () {
