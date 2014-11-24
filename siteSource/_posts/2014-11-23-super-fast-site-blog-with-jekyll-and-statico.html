@@ -1,0 +1,161 @@
+---
+layout: post
+title: Super Fast Site/Blog
+lead:   with jekyll and statico
+comments: true
+category : blog
+by_author : 'by <a href="https://twitter.com/mrduguo">Guo Du</a>'
+---
+
+<p class="lead">For impatient web users, an eye blink is just too long to wait [<a href="http://www.nytimes.com/2012/03/01/technology/impatient-web-users-flee-slow-loading-sites.html">NYTimes</a>].
+    People don't like wait. With technologies and cloud services avaliable today, we can easily build and run a site as fast as google homepage for FREE. I will use statico.io as example to show you how.
+</p>
+
+<h2 id="requirements">Requirements</h2>
+<p>
+    It require a standard java and ruby development environments. You may already have it on your machine, so verify first before follow the installation link. Here are the things you need:
+<ol>
+    <li>
+        <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java 7+</a>
+        <ul>
+            <li>Verify your installation: <code>java -version</code></li>
+            <li><a href="http://openjdk.java.net/install/index.html">OpenJDK</a> also do</li>
+        </ul>
+    </li>
+    <li>
+        <a href="https://www.ruby-lang.org/en/installation/">Ruby 2+</a>
+        <ul>
+            <li>Verify your installation: <code>ruby -v</code></li>
+        </ul>
+    </li>
+    <li>
+        <a href="http://jekyllrb.com/docs/installation/">Jekyll with rouge</a>
+        <ul>
+            <li>Installation: <code>gem install jekyll rouge</code></li>
+            <li>Verify your installation: <code>jekyll -v</code></li>
+            <li>Windows user may need additional <a href="http://jekyllrb.com/docs/windows/">steps</a> to install</li>
+        </ul>
+    </li>
+</ol>
+</p>
+
+
+<h2 id="local-development">Get it work locally</h2>
+<h3>1. Download source code</h3>
+<p>
+    Get statico.io website <a href="https://github.com/mrduguo/statico-www">source code</a> as a start point. This is how I start this website by clone <a href="https://github.com/twbs/bootstrap">bootstrap</a> git repo. Once you get familiar with the file structure and page components, then start to apply your beautiful design to make it yours.
+{% highlight sh %}
+git clone https://github.com/mrduguo/statico-www.git
+cd statico-www
+{% endhighlight %}
+    Alternatively, you may <a href="https://github.com/mrduguo/statico-www/archive/master.zip">download</a> the latest source code instead of using git.
+</p>
+<h3>2. Generate the site and optimize with statico</h3>
+<p>
+{% highlight sh %}
+./optimizer
+
+# After those commands finished successfully, you will see those optimized files from console log:
+#> optimized /blog/index.html in 0.139 seconds
+#> optimized session 82bc1dcfe8a3caa86de2f5387d10ec10 to build/statico-optimized-files/blog/index.html
+#> optimized /document/index.html in 0.231 seconds
+#> optimized session b342cf5b317c9e8ae9ba87503cc22037 to build/statico-optimized-files/document/index.html
+#> optimized /index.html in 0.148 seconds
+#> optimized session f0b23da8f76d7f66a4308cb72af90d50 to build/statico-optimized-files/index.html
+{% endhighlight %}
+</p>
+<h3>3. Development with jekyll watch mode</h3>
+<p>
+    It's important for everything working locally for any web project. Jekyll watch mode was designed to make static site development easy as well. After you run following command, then you may browse the site at <a href="http://0.0.0.0:7112/">http://0.0.0.0:7112/</a>. Any change to site source code will trigger jekyll to regenerate the page in a few seconds.
+{% highlight sh %}
+./optimizer dev
+
+#> STD: Configuration file: jekyll/config.yml
+#> STD:     Server address: http://0.0.0.0:7112/
+#> STD:   Server running... press ctrl-c to stop.
+{% endhighlight %}
+</p>
+
+
+<h2 id="server-deployment">Make it fast for everyone</h2>
+<p>
+    It's pretty easy to <a href="https://www.google.com/webhp#q=host+a+static+site+for+FREE">host a static site for FREE</a>. I choose AWS S3 and CloudFront for reliability and speed for visitors around global. It will be more complicated than get the site running locally, but I will have screen shots help you to walk thought those once off setup.
+</p>
+<h3>1. Create S3 Bucket for website</h3>
+<p>
+Sign up an <a href="https://portal.aws.amazon.com/gp/aws/developer/registration/index.html">AWS account</a> if you don't have yet. After login, go to <a href="https://console.aws.amazon.com/s3/home">S3 Management Console</a>.
+    <ul>
+        <li>
+            <div>Click <code>Create Bucket</code> button and it will bring the simple form you need:
+            </div>
+            <img src="/assets/images/posts/super-fast-site-blog/create-bucket.png"/>
+        </li>
+    </ul>
+    {% highlight sh %}
+    git clone https://github.com/mrduguo/statico-www.git
+    cd statico-www
+    ./optimizer
+
+    # After those commands finished successfully, you will see those optimized files from console log:
+    #> optimized /blog/index.html in 0.139 seconds
+    #> optimized session 82bc1dcfe8a3caa86de2f5387d10ec10 to build/statico-optimized-files/blog/index.html
+    #> optimized /document/index.html in 0.231 seconds
+    #> optimized session b342cf5b317c9e8ae9ba87503cc22037 to build/statico-optimized-files/document/index.html
+    #> optimized /index.html in 0.148 seconds
+    #> optimized session f0b23da8f76d7f66a4308cb72af90d50 to build/statico-optimized-files/index.html
+    {% endhighlight %}
+</p>
+<h3>Development with jekyll watch mode</h3>
+<p>
+    {% highlight sh %}
+    ./optimizer dev
+
+    #> STD: Configuration file: jekyll/config.yml
+    #> STD:     Server address: http://0.0.0.0:7112/
+    #> STD:   Server running... press ctrl-c to stop.
+    {% endhighlight %}
+    Then you may browse the site at <a href="http://0.0.0.0:7112/">http://0.0.0.0:7112/</a>
+</p>
+
+
+
+
+* Ruby
+Get site running locally
+Running site locally for development is easy and straight-forward, but there are a few requirements you’ll need to make sure your system has before you start.
+
+Ruby (including development headers)
+RubyGems
+Jekyll
+Java
+
+Make sure you have decent ruby / java[1.6+] installed.
+install jekyll
+http://jekyllrb.com
+
+statico.io homepage and blog is as fast as google homepage, because it's was generated as static HTML at publish time by jekyll and optimized by statio. The site was stored at S3 and delivered by CloudFront so everyone around the global can enjoy the same fast. It's perfect for marketing sites and blogs.
+
+Publish the site to the world
+
+Why it is fast
+--------------
+To build a site with top performance, all things has to work together with best
+
+
+
+The Cost
+------------------
+
+Dynamically
+http://kylerush.net/blog/super-fast-architecture/
+
+
+http://speckyboy.com/2012/02/22/good-old-static-html-sites-arent-dead-yet-should-they-be/
+https://engineering.gosquared.com/gosquared-static-website
+http://www.michaelgallego.fr/blog/2013/08/27/static-website-on-s3-cloudfront-and-route-53-the-right-way/
+https://davidmichaelross.com/blog/learn-from-static-site-generators/
+
+Speed is more than a feature. Speed is the most important feature. If your application is slow, people won’t use it...
+There is real empirical evidence that substantiates the fact that speed is more than a feature. It’s a requirement.
+Fred Wilson
+http://estelle.github.io/rwdpanacea/#slide27
