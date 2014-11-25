@@ -8,12 +8,17 @@
     </ul>
 </nav>
 
+<input type="text" class="form-control" placeholder="Type a url to preview" id="previewInput" disabled="disabled">
+<button class="btn btn-default ladda-button" data-style="expand-left" type="button" id="previewButton" disabled="disabled" data-loading=""></button>
+
 <div class="optimize-result">
     <div class="alert alert-info fade out in previewResult">
         <button type="button" class="close">×</button>
         <span class="content">
             <span id="optimiseMsgs">
-                <div class="optimise-msg">11:16:37 connecting...</div>
+                <div class="optimise-msg">11:16:37 connecting...
+                    <span class="benchmark-result">User  <a href="http://wpt.statico.io/video/view.php?id=141124_a04967a47d31694ed59c251e522f0e10b2330a05" target="_blank">see</a> your page <a href="http://wpt.statico.io/video/compare.php?ival=100&amp;tests=141124_5V_B1,141124_SM_B5" target="_blank" class="result-number">50%</a> faster!</span>
+                </div>
             </span>
         </span>
     </div>
@@ -30,11 +35,7 @@
     <div class="alert alert-success fade out in previewResult">
         <button type="button" class="close">×</button>
         <span class="content">
-            <div class="optimise-msg feed-back-email-form">
-                <input type="text" class="form-control"
-                       name="feedBackEmail"
-                       placeholder="your email and a message">
-            </div>
+            <div class="optimise-msg">This is just a preview! Please keep touch with us to get your site optimized with best result:</div><div class="optimise-msg feed-back-email-form"><input type="text" class="form-control" name="feedBackEmail" placeholder="your email"/></div><div class="optimise-msg">Thanks!</div>
         </span>
     </div>
 </div>
