@@ -99,7 +99,7 @@ $(function () {
                     spinner.stop();
                     var msgBody=JSON.stringify(msgs);
                     SIO.accountSendEmail(
-                        'benchmark_'+(msgBody.indexOf('result-number')>0?'success':'failed'),
+                        'benchmark_'+(msgBody.indexOf('result-optimized-percent')>0?'success':'failed'),
                             'optimise finish: '+isSuccess,
                         msgBody,
                         function () {
