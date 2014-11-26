@@ -41,7 +41,7 @@ by_author : 'by <a href="https://twitter.com/mrduguo">Guo Du</a>'
 
 
 <h2 id="local-development">Get it work locally</h2>
-<h3>1. Download source code</h3>
+<h3 id="download-source">1. Download source code</h3>
 <p>
     Get statico.io website <a href="https://github.com/mrduguo/statico-www">source code</a> as a start point. This is how I start this website by clone <a href="https://github.com/twbs/bootstrap">bootstrap</a> git repo. Once you get familiar with the file structure and page components, then start to apply your beautiful design to make it yours.
 {% highlight sh %}
@@ -50,12 +50,13 @@ cd statico-www
 {% endhighlight %}
     Alternatively, you may <a href="https://github.com/mrduguo/statico-www/archive/master.zip">download</a> the latest source code instead of using git.
 </p>
-<h3>2. Generate the site and optimize with statico</h3>
+<h3 id="generate-site-and-optimize">2. Generate the site and optimize with statico</h3>
 <p>
 {% highlight sh %}
 ./optimizer
 
 # After those commands finished successfully, you will see those optimized files from console log:
+#> Generating ...
 #> optimized /blog/index.html in 0.139 seconds
 #> optimized session 82bc1dcfe8a3caa86de2f5387d10ec10 to build/statico-optimized-files/blog/index.html
 #> optimized /document/index.html in 0.231 seconds
@@ -64,7 +65,7 @@ cd statico-www
 #> optimized session f0b23da8f76d7f66a4308cb72af90d50 to build/statico-optimized-files/index.html
 {% endhighlight %}
 </p>
-<h3>3. Development with jekyll watch mode</h3>
+<h3 id="development-with-jekyll-watch">3. Development with jekyll watch mode</h3>
 <p>
     It's important for everything working locally for any web project. Jekyll watch mode was designed to make static site development easy as well. After you run following command, then you may browse the site at <a href="http://0.0.0.0:7112/">http://0.0.0.0:7112/</a>. Any change to site source code will trigger jekyll to regenerate the page in a few seconds.
 {% highlight sh %}
@@ -81,81 +82,63 @@ cd statico-www
 <p>
     It's pretty easy to <a href="https://www.google.com/webhp#q=host+a+static+site+for+FREE">host a static site for FREE</a>. I choose AWS S3 and CloudFront for reliability and speed for visitors around global. It will be more complicated than get the site running locally, but I will have screen shots help you to walk thought those once off setup.
 </p>
-<h3>1. Create S3 Bucket for website</h3>
 <p>
-Sign up an <a href="https://portal.aws.amazon.com/gp/aws/developer/registration/index.html">AWS account</a> if you don't have yet. After login, go to <a href="https://console.aws.amazon.com/s3/home">S3 Management Console</a>.
+    Sign up an <a href="https://portal.aws.amazon.com/gp/aws/developer/registration/index.html">AWS account</a> if you don't have yet. Login to <a href="https://console.aws.amazon.com/s3/home">S3 Management Console</a>.
+</p>
+<h3 id="create-s3-bucket">1. Create S3 Bucket for website</h3>
+<p>
     <ul>
         <li>
-            <div>Click <code>Create Bucket</code> button and it will bring the simple form you need:
-            </div>
+            <div>Create Bucket</div>
             <img src="/assets/images/posts/super-fast-site-blog/create-bucket.png"/>
         </li>
+        <li>
+            <div>Enable website hosting</div>
+            <img src="/assets/images/posts/super-fast-site-blog/support-website-hosting.png"/>
+        </li>
     </ul>
-    {% highlight sh %}
-    git clone https://github.com/mrduguo/statico-www.git
-    cd statico-www
-    ./optimizer
 
-    # After those commands finished successfully, you will see those optimized files from console log:
-    #> optimized /blog/index.html in 0.139 seconds
-    #> optimized session 82bc1dcfe8a3caa86de2f5387d10ec10 to build/statico-optimized-files/blog/index.html
-    #> optimized /document/index.html in 0.231 seconds
-    #> optimized session b342cf5b317c9e8ae9ba87503cc22037 to build/statico-optimized-files/document/index.html
-    #> optimized /index.html in 0.148 seconds
-    #> optimized session f0b23da8f76d7f66a4308cb72af90d50 to build/statico-optimized-files/index.html
-    {% endhighlight %}
 </p>
-<h3>Development with jekyll watch mode</h3>
+<h3 id="release-to-s3">2. Release the site to S3</h3>
 <p>
-    {% highlight sh %}
-    ./optimizer dev
+<ul>
+    <li>
+        Update the bucket name in <code><a href="https://github.com/mrduguo/statico-www/blob/master/config.gradle#L36">config.gradle</a></code> file to be <code>bucketName='www-mycoolstaticsite-com'</code>
+    </li>
+    <li>
+        Then run <code>./optimizer release</code> which will upload to S3 in addition to default <code>./optimizer</code> command:
+{% highlight sh %}
+./optimizer release
 
-    #> STD: Configuration file: jekyll/config.yml
-    #> STD:     Server address: http://0.0.0.0:7112/
-    #> STD:   Server running... press ctrl-c to stop.
-    {% endhighlight %}
-    Then you may browse the site at <a href="http://0.0.0.0:7112/">http://0.0.0.0:7112/</a>
+#> Generating ...
+#> optimized ...
+#> uploaded /build/statico-optimized-files/blog/index.html
+#> uploaded /build/statico-optimized-files/document/index.html
+#> uploaded /build/statico-optimized-files/index.html
+#> uploaded /build/jekyll-generated-site/atom.xml
+#> uploaded /build/jekyll-generated-site/sitemap.xml
+{% endhighlight %}
+    </li>
+    <li>
+        You should be able to see the page live at: <a href="http://www-mycoolstaticsite-com.s3.amazonaws.com/index.html">http://www-mycoolstaticsite-com.s3.amazonaws.com/index.html</a>
+    </li>
+</ul>
 </p>
+<h3 id="distribute-with-cloud-front">3. Distribute with CloudFront</h3>
+<p>
+<ul>
+    <li>
+        <div>Login to <a href="https://console.aws.amazon.com/cloudfront/home">CloudFront Management Console</a> then click <code>Create Distribution</code>:</div>
+        <img src="/assets/images/posts/super-fast-site-blog/cloud-front-method.png"/>
+    </li>
+    <li>
+        <div>Choose the website s3 bucket:</div>
+        <img src="/assets/images/posts/super-fast-site-blog/cloud-front-create.png"/>
+    </li>
+    <li>
+        <div>Create a CNAME for the distribution:</div>
+        <img src="/assets/images/posts/super-fast-site-blog/cloud-front-list.png"/>
+    </li>
+</ul>
 
-
-
-
-* Ruby
-Get site running locally
-Running site locally for development is easy and straight-forward, but there are a few requirements you’ll need to make sure your system has before you start.
-
-Ruby (including development headers)
-RubyGems
-Jekyll
-Java
-
-Make sure you have decent ruby / java[1.6+] installed.
-install jekyll
-http://jekyllrb.com
-
-statico.io homepage and blog is as fast as google homepage, because it's was generated as static HTML at publish time by jekyll and optimized by statio. The site was stored at S3 and delivered by CloudFront so everyone around the global can enjoy the same fast. It's perfect for marketing sites and blogs.
-
-Publish the site to the world
-
-Why it is fast
---------------
-To build a site with top performance, all things has to work together with best
-
-
-
-The Cost
-------------------
-
-Dynamically
-http://kylerush.net/blog/super-fast-architecture/
-
-
-http://speckyboy.com/2012/02/22/good-old-static-html-sites-arent-dead-yet-should-they-be/
-https://engineering.gosquared.com/gosquared-static-website
-http://www.michaelgallego.fr/blog/2013/08/27/static-website-on-s3-cloudfront-and-route-53-the-right-way/
-https://davidmichaelross.com/blog/learn-from-static-site-generators/
-
-Speed is more than a feature. Speed is the most important feature. If your application is slow, people won’t use it...
-There is real empirical evidence that substantiates the fact that speed is more than a feature. It’s a requirement.
-Fred Wilson
-http://estelle.github.io/rwdpanacea/#slide27
+</p>
