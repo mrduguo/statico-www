@@ -2,6 +2,6 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    compile 'io.staticcdn.sdk:staticcdn-sdk-client:0.1.15'
+    compile 'io.staticcdn.sdk:staticcdn-sdk-client:0.1.21'
 }
 
