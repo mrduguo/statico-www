@@ -142,3 +142,29 @@ cd statico-www
 </ul>
 
 </p>
+
+
+<h2 id="the-cost">Is it FREE?</h2>
+<p>
+    The calculation based on an optimized site with 10K monthly visits with average 2 pages per visit. Assume you signup for <a href="http://aws.amazon.com/free/">AWS Free Tier</a> to utilize those resource free for 1 year.
+    <ul>
+    <li>S3
+        <ul>
+            <li>Storage: 20 pages x 500KB = 10MB (Allowance 5GB)</li>
+            <li>Get Requests: 2 pages x 5 resources per page x 10K x 10% Cache Miss = 10K  (Allowance 20K)</li>
+        </ul>
+    </li>
+    <li>CloudFront
+        <ul>
+            <li>Data Transfer Out: 2 pages x 500KB x 10K = 10GB (Allowance 50GB)</li>
+            <li>Requests: 2 pages x 5 resources per page x 10K = 100K  (Allowance 2000K)</li>
+        </ul>
+    </li>
+    <li>statico
+        <ul>
+            <li>Free for first 10K visits!</li>
+        </ul>
+    </li>
+    </ul>
+        Hope you enjoy the speed experience!
+</p>
