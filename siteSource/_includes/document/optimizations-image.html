@@ -63,3 +63,12 @@ Sample sprite images css:
 }
 {% endhighlight %}
 </p>
+
+<h4 id="sio-img-resize">annotation: <code>sio-img-resize-</code></h4>
+<p>Resize image with <a href="https://kraken.io/docs/image-resizing">Kraken image resizing API</a>. Any annotation start with <code>sio-img-resize-</code> prefix will passed to the API. If only width provided, <code>strategy</code> <code>landscape</code> will be used:
+{% highlight css %}
+.hero-small{
+    background-image: url(hero.jpg?sio-img-resize-width=500);
+}
+{% endhighlight %}
+</p>
