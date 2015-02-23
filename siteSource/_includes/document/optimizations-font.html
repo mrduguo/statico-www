@@ -29,29 +29,29 @@ Just add <code>&sio-progressive-load=enabled</code> to your google font link. e.
 It will optimized as:
 {% highlight html %}
 <script>
-    /*
-     inspired from https://github.com/filamentgroup/loadCSS
-     */
     (function () {
         var href = '//fonts.googleapis.com/css?family=Lato:400,700';
-        var ss = document.createElement("link");
-        ss.rel = "stylesheet";
-        ss.href = href;
-        ss.media = "only x";
-        var ref = document.getElementsByTagName("script")[ 0 ];
-        ref.parentNode.insertBefore(ss, ref);
-
-        var sheets = document.styleSheets;
-        function toggleMedia() {
-            for (var i = 0; i < sheets.length; i++) {
-                if (sheets[ i ].href && sheets[ i ].href.indexOf(href) > -1) {
-                    ss.media = "all";
-                    return;
-                }
-            }
-            setTimeout(toggleMedia,10);
+        var loadCss=function(){
+            var ss = document.createElement("link");
+            ss.rel = "stylesheet";
+            ss.href = href;
+            var ref = document.getElementsByTagName("script")[ 0 ];
+            ref.parentNode.insertBefore(ss, ref);
         }
-        toggleMedia();
+
+        try{
+            var cacheKey='sio-loaded-'+href
+            if(localStorage[cacheKey]){
+                loadCss();
+            }else{
+                localStorage[cacheKey]=Date.now();
+                window.addEventListener('load', function(){
+                    loadCss();
+                }, false);
+            }
+        }catch(ignore){
+            loadCss();
+        }
     })();
 </script>
 <noscript>
@@ -67,30 +67,31 @@ Just add <code>sio-progressive-load=enabled</code> to your custom fonts css, all
 
 It will optimized as:
 {% highlight html %}
+
 <script>
-    /*
-     inspired from https://github.com/filamentgroup/loadCSS
-     */
     (function () {
         var href = '//d310mzohrxmrzp.cloudfront.net/fb00c3edf7db76628b756ee5ffa19c6c.css';
-        var ss = document.createElement("link");
-        ss.rel = "stylesheet";
-        ss.href = href;
-        ss.media = "only x";
-        var ref = document.getElementsByTagName("script")[ 0 ];
-        ref.parentNode.insertBefore(ss, ref);
-
-        var sheets = document.styleSheets;
-        function toggleMedia() {
-            for (var i = 0; i < sheets.length; i++) {
-                if (sheets[ i ].href && sheets[ i ].href.indexOf(href) > -1) {
-                    ss.media = "all";
-                    return;
-                }
-            }
-            setTimeout(toggleMedia,10);
+        var loadCss=function(){
+            var ss = document.createElement("link");
+            ss.rel = "stylesheet";
+            ss.href = href;
+            var ref = document.getElementsByTagName("script")[ 0 ];
+            ref.parentNode.insertBefore(ss, ref);
         }
-        toggleMedia();
+
+        try{
+            var cacheKey='sio-loaded-'+href
+            if(localStorage[cacheKey]){
+                loadCss();
+            }else{
+                localStorage[cacheKey]=Date.now();
+                window.addEventListener('load', function(){
+                    loadCss();
+                }, false);
+            }
+        }catch(ignore){
+            loadCss();
+        }
     })();
 </script>
 <noscript>

@@ -3,3 +3,10 @@ body{
   background-repeat: no-repeat;
   background-image: url(../../images/hero/bg.jpg?sio-data-url=enabled&sio-img-resize-width=500);
 }
+
+#top {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url(../../images/hero/bg.jpg);
+}
+
