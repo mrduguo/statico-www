@@ -38,10 +38,10 @@ statico homepage with external google fonts [<a href="http://wpt.statico.io/vide
 
 <h2 id="progressive-render">Progressive Render</h2>
 <p>
-    With best effort, there are <a href="http://caniuse.com/#feat=fontface">93% of browsers</a> support web fonts today. Font may also not rendered due to network timeout. And give IE render with fallback fonts at first place, the best would to accept the page could be rendered without custom font.
+    With best effort, there are <a href="http://caniuse.com/#feat=fontface">93% of browsers</a> support web fonts today. Font may also not rendered due to network timeout. And give IE render with fallback fonts at first place, the best would to accept that page could be rendered without custom font.
 </p>
 <p>
-    When page speed is important such as at landing pages, we could render the page without font first. Then progressive render the customer fonts on page load. Subsequent pages with same font reference will be rendered immediately once it's been cached.
+    When page speed is important especially on landing pages, we could render the page without font first. Then progressive render the customer fonts on page load. Subsequent pages with same font reference will be rendered immediately once it's been cached.
 {% highlight javascript %}
     <script>
         (function () {
@@ -71,6 +71,7 @@ statico homepage with external google fonts [<a href="http://wpt.statico.io/vide
 </script>
 {% endhighlight %}
 
-    The approach deliver fastest user experience across all browsers consistently. statico homepage optimized with progressive font rendering [<a href="http://wpt.statico.io/video/compare.php?ival=100&tests=150223_WK_V-r:2-c:0-e:0.5,150223_QJ_W-r:2-c:0-e:0.5,150223_D1_T-r:2-c:0-e:0.6">data</a> ]:
+<h2 id="the-result">The Result</h2>
+    This approach deliver fastest user experience across all browsers consistently. statico homepage optimized with progressive font rendering [<a href="http://wpt.statico.io/video/compare.php?ival=100&tests=150223_WK_V-r:2-c:0-e:0.5,150223_QJ_W-r:2-c:0-e:0.5,150223_D1_T-r:2-c:0-e:0.6">data</a> ]:
     <img src="/assets/images/posts/fonts-optimization/optimized-progressive-font-rendering.png?sio-use-cdn=enabled" style="max-width: 100%;"/>
 </p>
