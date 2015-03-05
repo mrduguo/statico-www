@@ -16,4 +16,4 @@ encoding:         UTF-8
 # statico
 statico:
   sdk:
-    version:      0.1.21
+    version:      0.1.23
