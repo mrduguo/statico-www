@@ -1,6 +1,6 @@
 if (typeof OPTIMISED === 'undefined') OPTIMISED = false;
 var SIO=SIO||{};
-SIO.ajaxBaseUrl='https://ajax.staticcdn.io'
+SIO.ajaxBaseUrl='https://ajax.statico.io'
 $(function () {
     if (!OPTIMISED) {
         SIO.ajaxBaseUrl='http://localhost:7110'
