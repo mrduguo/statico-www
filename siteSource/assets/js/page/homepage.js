@@ -1,5 +1,5 @@
 $(function () {
-    var homepageTitleAnimation = $('#lifecycle .flat-title');
+    var homepageTitleAnimation = $('#customers .flat-title');
     var resizeTitle = function () {
         var movedPix = $(window).scrollTop() + 0;
         if (movedPix > 200) {
