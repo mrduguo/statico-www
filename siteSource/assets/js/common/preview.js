@@ -86,11 +86,11 @@ $(function () {
                 };
                 ws.onclose = function () {
                     if (isSuccess) {
-                        var resultText = '<div class="optimise-msg">This is just a preview! Please keep touch with us to get your site optimized with best result:</div><div class="optimise-msg feed-back-email-form"><input type="text" class="form-control" name="feedBackEmail" placeholder="your email"/></div><div class="optimise-msg">Thanks!</div>';
+                        var resultText = '<div class="optimise-msg">This is just a preview! Please <a href="mailto:guo@statico.io">keep touch with us</a> to get your site optimized with best result!</div><div class="optimise-msg">Thanks!</div>';
                         showResult(resultText, 'success');
                         SIO.tracking.event('Preview Success',urlToPreview,aid,Date.now()-previewStart);
                     }else{
-                        var resultText = '<div class="optimise-msg">Woops! The toy didn\'t work this time. Please keep touch with us and will let you known when it\'s been fixed:</div><div class="optimise-msg feed-back-email-form"><input type="text" class="form-control" name="feedBackEmail" placeholder="your email"/></div><div class="optimise-msg">Thanks!</div>';
+                        var resultText = '<div class="optimise-msg">Woops! The toy didn\'t work this time. Please <a href="mailto:guo@statico.io">keep touch with us</a> and will let you known when it\'s been fixed!</div><div class="optimise-msg">Thanks!</div>';
                         showResult(resultText, 'danger');
                         SIO.tracking.event('Preview Failed',urlToPreview,aid,Date.now()-previewStart);
                     }
