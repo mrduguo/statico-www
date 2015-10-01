@@ -10,7 +10,7 @@ source:           siteSource
 destination:      build/jekyll-generated-site
 port:             7112
 baseurl:          ''
-url:              https://statico.io
+url:              http://statico.io
 encoding:         UTF-8
 
 # statico

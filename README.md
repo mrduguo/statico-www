@@ -1,7 +1,7 @@
-[statico.io](https://statico.io)
+[statico.io](http://statico.io)
 ===================
 
-This repo is is source code for [statico.io](https://statico.io) marketing site and blog. It's a sample project to demonstrate how to build a super fast site and blog with [jekyll](http://jekyllrb.com/) and [statico](https://statico.io/). 
+This repo is is source code for [statico.io](http://statico.io) marketing site and blog. It's a sample project to demonstrate how to build a super fast site and blog with [jekyll](http://jekyllrb.com/) and [statico](https://statico.io/). 
 
 Requirements
 ------------------
